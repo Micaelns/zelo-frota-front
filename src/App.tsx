@@ -1,16 +1,12 @@
-//import { useState } from "react";
 import "./App.css";
+import { DashboardPage } from "./pages/Dashboard/DashboardPage";
+import { DefaultLayout } from "./components/layouts/DefaultLayout";
 
 function App() {
-  //const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <h1 className="text-3xl font-bold">Hello Tailwind ss</h1>
-        Hello T
-      </div>
-    </>
+    <DefaultLayout>
+      <DashboardPage></DashboardPage>
+    </DefaultLayout>
   );
 }
 
