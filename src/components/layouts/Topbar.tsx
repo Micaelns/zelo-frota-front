@@ -84,9 +84,9 @@ export function Topbar({ onToggle }: TopbarProps) {
                 mt-auto
             "
         >
-          <LogOut />
+          <LogOut size={18} />
 
-          {<span>Sair</span>}
+          <span className="hidden md:block">Sair</span>
         </button>
       </div>
     </header>
