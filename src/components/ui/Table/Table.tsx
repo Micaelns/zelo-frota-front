@@ -66,7 +66,10 @@ export default function Table({
               key={row.id || indexRow}
             >
               {columnNames.map((col) => (
-                <td className="p-2">
+                <td
+                  key={col.field || col.label}
+                  className="p-2"
+                >
                   {col.format(row[col.field])}
                 </td>
               ))}
