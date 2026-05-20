@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { DefaultLayout } from "../../components/layouts/DefaultLayout";
 import Table from "../../components/ui/Table/Table";
+import DefaultModal from "../../components/modal/defaultModal";
 
 export function VehiclePage() {
+  const [isOpen, setIsOpen] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itensPerPage, setItensPerPage] = useState(5);
 
@@ -256,9 +259,32 @@ export function VehiclePage() {
     changeItemPerPage: changeItemPerPage,
   };
 
+  const onClose = () => {
+    setIsOpen(false);
+  };
+  const buttonConfirm = {
+    text: "Salvar",
+    action: () => {
+      console.log("executou...");
+    },
+  };
   return (
     <DefaultLayout>
+      <DefaultModal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Exemplo"
+        buttonConfirm={buttonConfirm}
+      >
+        Micael Nunesss
+      </DefaultModal>
       <div className="flex flex-col justify-center bg-white p-4 gap-2">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-blue-700 cursor-pointer w-24 rounded-xl p-1 text-white m-2"
+        >
+          Abrir modal
+        </button>
         <Table
           headerTable="Lista de Produtos"
           columnNames={columnNames}
