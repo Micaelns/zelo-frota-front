@@ -7,11 +7,10 @@ import {
 
 import { MetricCard } from "../../components/cards/MetricCard";
 import { DashboardWidget } from "../../components/dashboard/DashboardWidget";
-import { DefaultLayout } from "../../app/layouts/DefaultLayout";
 
 export function DashboardPage() {
   return (
-    <DefaultLayout>
+    <>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <MetricCard
           title="Motoristas"
@@ -44,6 +43,6 @@ export function DashboardPage() {
           />
         </DashboardWidget>
       </div>
-    </DefaultLayout>
+    </>
   );
 }

@@ -1,14 +1,7 @@
-import "./App.css";
-// import { DashboardPage } from "./pages/Dashboard/DashboardPage";
-// import { AuthLayout } from "./components/layouts/AuthLayout";
-import { LoginPage } from "./pages/LoginPage";
-//import { DefaultLayout } from "./components/layouts/DefaultLayout";
+import { AppRoutes } from "./app/routes/AppRoutes";
 
 function App() {
-  //  <DefaultLayout>
-  //  <DashboardPage></DashboardPage>
-  //   </DefaultLayout>
-  return <LoginPage></LoginPage>;
+  return <AppRoutes />;
 }
 
 export default App;

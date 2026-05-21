@@ -1,15 +1,9 @@
 import { useState } from "react";
-
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Slidebar";
 import { Topbar } from "./Topbar";
 
-type DefaultLayoutProps = {
-  children: React.ReactNode;
-};
-
-export function DefaultLayout({
-  children,
-}: DefaultLayoutProps) {
+export function DefaultLayout() {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
@@ -22,7 +16,9 @@ export function DefaultLayout({
           onToggle={() => setCollapsed(!collapsed)}
         />
 
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-6">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

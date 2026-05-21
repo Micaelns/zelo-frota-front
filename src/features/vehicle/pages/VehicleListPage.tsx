@@ -270,7 +270,7 @@ export function VehicleListPage() {
     },
   };
   return (
-    <DefaultLayout>
+    <>
       <DefaultModal
         isOpen={isOpen}
         onClose={onClose}
@@ -291,6 +291,6 @@ export function VehicleListPage() {
           navegation={navegation}
         />
       </div>
-    </DefaultLayout>
+    </>
   );
 }

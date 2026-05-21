@@ -4,6 +4,7 @@ import {
   Calendar,
   Users,
 } from "lucide-react";
+import { SidebarItem } from "./SlidebarItem";
 
 type SidebarProps = {
   collapsed: boolean;
@@ -40,61 +41,38 @@ export function Sidebar({ collapsed }: SidebarProps) {
         <SidebarItem
           icon={<LayoutDashboard />}
           label="Dashboard"
+          route="/"
           collapsed={collapsed}
         />
 
         <SidebarItem
           icon={<Truck />}
           label="Viagens"
+          route="/"
+          collapsed={collapsed}
+        />
+
+        <SidebarItem
+          icon={<Truck />}
+          label="Veiculos"
+          route="/vehicles"
           collapsed={collapsed}
         />
 
         <SidebarItem
           icon={<Users />}
           label="Motoristas"
+          route="/"
           collapsed={collapsed}
         />
 
         <SidebarItem
           icon={<Calendar />}
           label="Agenda"
+          route="/"
           collapsed={collapsed}
         />
       </nav>
     </aside>
-  );
-}
-
-type SidebarItemProps = {
-  icon: React.ReactNode;
-  label: string;
-  collapsed: boolean;
-};
-
-function SidebarItem({
-  icon,
-  label,
-  collapsed,
-}: SidebarItemProps) {
-  return (
-    <button
-      className="
-        flex
-        items-center
-        gap-3
-        rounded-xl
-        px-3
-        py-3
-        hover:bg-blue-500
-        transition-colors
-        cursor-pointer
-      "
-    >
-      <div className="shrink-0">{icon}</div>
-
-      {!collapsed && (
-        <span className="font-medium">{label}</span>
-      )}
-    </button>
   );
 }
