@@ -1,7 +1,7 @@
 import { Lock, Mail } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 
-import { AuthLayout } from "../components/layouts/AuthLayout";
+import { AuthLayout } from "../app/layouts/AuthLayout";
 import { FormInput } from "../components/ui/FormInput";
 
 export function LoginPage() {

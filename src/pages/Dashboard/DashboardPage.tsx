@@ -7,7 +7,7 @@ import {
 
 import { MetricCard } from "../../components/cards/MetricCard";
 import { DashboardWidget } from "../../components/dashboard/DashboardWidget";
-import { DefaultLayout } from "../../components/layouts/DefaultLayout";
+import { DefaultLayout } from "../../app/layouts/DefaultLayout";
 
 export function DashboardPage() {
   return (

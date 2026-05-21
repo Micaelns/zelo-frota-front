@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { X } from "lucide-react";
+import { ButtonSave } from "../ui/ButtonSave";
+import { ButtonDefault } from "../ui/ButtonDefault";
 
 interface ButtonConfirm {
   text: string;
@@ -68,21 +70,17 @@ export default function DefaultModal({
         </div>
 
         <div className="flex justify-end gap-2 mt-2">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 text-zinc-600 border border-zinc-300 rounded-lg bg-zinc-50 hover:bg-zinc-100 text-sm font-medium transition-colors cursor-pointer"
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={() => {
+          <ButtonDefault
+            action={onClose}
+            label="Cancelar"
+          />
+          <ButtonSave
+            action={() => {
               buttonConfirm.action();
               onClose();
             }}
-            className="px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 text-sm font-medium transition-colors cursor-pointer"
-          >
-            {buttonConfirm.text}
-          </button>
+            label={buttonConfirm.text}
+          />
         </div>
       </div>
     </dialog>
