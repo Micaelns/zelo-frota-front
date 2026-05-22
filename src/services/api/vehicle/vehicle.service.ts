@@ -8,6 +8,6 @@ export const vehicleService = {
       setTimeout(resolve, 500)
     );
 
-    return vehiclesMock.slice(skip, take);
+    return vehiclesMock.slice(skip, skip + take);
   },
 };

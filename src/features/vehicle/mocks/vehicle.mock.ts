@@ -43,4 +43,10 @@ export const vehiclesMock: Vehicle[] = [
     vehicleType: "Carreta",
     mileage: 8000,
   },
+  {
+    id: "8",
+    plate: "AAP0E89",
+    vehicleType: "Carreta",
+    mileage: 8000,
+  },
 ];

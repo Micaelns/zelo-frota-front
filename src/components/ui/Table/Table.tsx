@@ -4,26 +4,16 @@ import {
   LoaderCircle,
 } from "lucide-react";
 import PaginatorTable from "./PaginatorTable";
+import type { NavigationData } from "../../../services/types/navigatorData.types";
+import type { ElementProps } from "../../../services/types/ElementProps.type";
 
-type colNames = {
-  field: string;
-  label: string;
-  format: (data: any) => any;
-};
-interface NavegatorProps {
-  totalItens: number;
-  currentPage: number;
-  itensPerPage: number;
-  changePage: (page: number) => void;
-  changeItemPerPage: (e: any) => void;
-}
 interface TableProps {
   headerTable: string;
-  columnNames: colNames[];
+  columnNames: ElementProps[];
   columnValues: any[];
   isLoading?: boolean;
   messageEmpty?: string;
-  navegation: NavegatorProps;
+  navigation: NavigationData;
   colEdit?: boolean;
   colTrash?: boolean;
 }
@@ -34,14 +24,10 @@ export default function Table({
   columnValues,
   isLoading = false,
   messageEmpty,
-  navegation,
+  navigation,
   colEdit = true,
   colTrash = true,
 }: TableProps) {
-  const totalPages = Math.ceil(
-    navegation.totalItens / navegation.itensPerPage
-  );
-
   const messageNoData =
     messageEmpty != null
       ? messageEmpty
@@ -76,35 +62,36 @@ export default function Table({
           </tr>
         </thead>
         <tbody>
-          {columnValues.map((row, indexRow) => (
-            <tr
-              className=" border-b border-zinc-100 hover:bg-slate-200"
-              key={row.id || indexRow}
-            >
-              {columnNames.map((col) => (
-                <td
-                  key={col.field || col.label}
-                  className="p-2"
-                >
-                  {col.format(row[col.field])}
-                </td>
-              ))}
-              {colEdit == true && (
-                <td className="p-2">
-                  <div className="p-2 rounded-xl cursor-pointer">
-                    <PencilLine size={14} />
-                  </div>
-                </td>
-              )}
-              {colTrash == true && (
-                <td className="p-2 ">
-                  <div className="p-2 rounded-xl cursor-pointer">
-                    <Trash2 size={14} />
-                  </div>
-                </td>
-              )}
-            </tr>
-          ))}
+          {isLoading == false &&
+            columnValues.map((row, indexRow) => (
+              <tr
+                className=" border-b border-zinc-100 hover:bg-slate-200"
+                key={row.id || indexRow}
+              >
+                {columnNames.map((col) => (
+                  <td
+                    key={col.field || col.label}
+                    className="p-2"
+                  >
+                    {col.format(row[col.field])}
+                  </td>
+                ))}
+                {colEdit == true && (
+                  <td className="p-2">
+                    <div className="p-2 rounded-xl cursor-pointer">
+                      <PencilLine size={14} />
+                    </div>
+                  </td>
+                )}
+                {colTrash == true && (
+                  <td className="p-2 ">
+                    <div className="p-2 rounded-xl cursor-pointer">
+                      <Trash2 size={14} />
+                    </div>
+                  </td>
+                )}
+              </tr>
+            ))}
           {(columnValues.length === 0 ||
             isLoading == true) && (
             <tr>
@@ -120,14 +107,16 @@ export default function Table({
           )}
         </tbody>
       </table>
-      <PaginatorTable
-        itemPerPage={navegation.itensPerPage}
-        changePerPage={navegation.changeItemPerPage}
-        totalItens={navegation.totalItens}
-        totalPages={totalPages}
-        currentPage={navegation.currentPage}
-        changePage={navegation.changePage}
-      />
+      {isLoading == false && columnValues.length != 0 && (
+        <PaginatorTable
+          itemPerPage={navigation.itemPerPage}
+          changePerPage={navigation.changePerPage}
+          totalItens={navigation.totalItens}
+          totalPages={navigation.totalPages}
+          currentPage={navigation.currentPage}
+          changePage={navigation.changePage}
+        />
+      )}
     </div>
   );
 }
