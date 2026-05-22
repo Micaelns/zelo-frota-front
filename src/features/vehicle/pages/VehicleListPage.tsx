@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { DefaultLayout } from "../../../app/layouts/DefaultLayout";
 import Table from "../../../components/ui/Table/Table";
 import { ButtonSave } from "../../../components/ui/ButtonSave";
 import DefaultModal from "../../../components/modal/DefaultModal";
+import { VehicleCreatePage } from "./VehicleCreatePage";
 
 export function VehicleListPage() {
   const [isOpen, setIsOpen] = useState(true);
@@ -274,16 +274,19 @@ export function VehicleListPage() {
       <DefaultModal
         isOpen={isOpen}
         onClose={onClose}
-        title="Exemplo"
+        title="Formulário Veículo"
         buttonConfirm={buttonConfirm}
       >
-        Micael Nunesss
+        <VehicleCreatePage />
       </DefaultModal>
       <div className="flex flex-col justify-center bg-white p-4 gap-2">
-        <ButtonSave
-          action={() => setIsOpen(true)}
-          label="Abrir modal"
-        />
+        <div className="flex justify-end">
+          <ButtonSave
+            action={() => setIsOpen(true)}
+            showIcon={false}
+            label="Novo"
+          />
+        </div>
         <Table
           headerTable="Lista de Produtos"
           columnNames={columnNames}
