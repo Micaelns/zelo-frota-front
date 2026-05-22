@@ -1,22 +1,22 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { NavigationData } from "../../../services/types/navigatorData.types";
 
 type PaginatorTableProps = {
-  currentPage: number;
-  totalItens: number;
-  totalPages: number;
-  itemPerPage: number;
-  changePerPage: (e: any) => void;
-  changePage: (page: number) => void;
+  navigation: NavigationData;
 };
 
 export default function PaginatorTable({
-  currentPage,
-  totalItens,
-  totalPages,
-  itemPerPage,
-  changePerPage,
-  changePage,
+  navigation,
 }: PaginatorTableProps) {
+  const {
+    currentPage,
+    totalItens,
+    totalPages,
+    itemPerPage,
+    changePerPage,
+    changePage,
+  } = navigation;
+
   const lastItemPage = currentPage * itemPerPage;
   const firstItemPage = lastItemPage - itemPerPage;
 

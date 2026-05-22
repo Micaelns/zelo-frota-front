@@ -108,14 +108,7 @@ export default function Table({
         </tbody>
       </table>
       {isLoading == false && columnValues.length != 0 && (
-        <PaginatorTable
-          itemPerPage={navigation.itemPerPage}
-          changePerPage={navigation.changePerPage}
-          totalItens={navigation.totalItens}
-          totalPages={navigation.totalPages}
-          currentPage={navigation.currentPage}
-          changePage={navigation.changePage}
-        />
+        <PaginatorTable navigation={navigation} />
       )}
     </div>
   );

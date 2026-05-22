@@ -74,6 +74,5 @@ export function useVehicleTypes() {
     isLoading,
     columnsMap,
     navigation,
-    loadVehicleTypes,
   };
 }

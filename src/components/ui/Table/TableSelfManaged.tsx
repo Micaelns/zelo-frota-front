@@ -1,6 +1,7 @@
 import { PencilLine, Trash2 } from "lucide-react";
 import { useState } from "react";
 import PaginatorTable from "./PaginatorTable";
+import type { NavigationData } from "../../../services/types/navigatorData.types";
 
 type colNames = {
   field: string;
@@ -47,6 +48,15 @@ export default function TableSelfManaged({
   const changeItemPerPage = (e: any) => {
     setItensPerPage(Number(e.target.value));
     setCurrentPage(1);
+  };
+
+  const navigation: NavigationData = {
+    totalItens: totalItens,
+    totalPages: totalPages,
+    currentPage: currentPage,
+    itemPerPage: itensPerPage,
+    changePage: changePage,
+    changePerPage: changeItemPerPage,
   };
 
   return (
@@ -113,14 +123,7 @@ export default function TableSelfManaged({
           )}
         </tbody>
       </table>
-      <PaginatorTable
-        itemPerPage={itensPerPage}
-        changePerPage={changeItemPerPage}
-        totalItens={totalItens}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        changePage={changePage}
-      />
+      <PaginatorTable navigation={navigation} />
     </div>
   );
 }
