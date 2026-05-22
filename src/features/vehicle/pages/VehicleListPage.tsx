@@ -3,213 +3,14 @@ import Table from "../../../components/ui/Table/Table";
 import { ButtonSave } from "../../../components/ui/ButtonSave";
 import DefaultModal from "../../../components/modal/DefaultModal";
 import { VehicleCreatePage } from "./VehicleCreatePage";
+import { useVehicles } from "../hooks/useVehicles";
 
 export function VehicleListPage() {
+  const { vehicles, isLoading } = useVehicles();
   const [isOpen, setIsOpen] = useState(true);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itensPerPage, setItensPerPage] = useState(5);
-
-  const [itens] = useState([
-    {
-      id: 1,
-      nome: "Teclado Mecânico",
-      categoria: "Periféricos",
-      preco: 350.0,
-    },
-    {
-      id: 2,
-      nome: 'Monitor 24" IPS',
-      categoria: "Monitores",
-      preco: 899.9,
-    },
-    {
-      id: 3,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 4,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 5,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 6,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 7,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 8,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 9,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 10,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 11,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 12,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 13,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 14,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 15,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 16,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 17,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 18,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 19,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 20,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 21,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 22,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 23,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 24,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 25,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 26,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 27,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 28,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 29,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 30,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 31,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 32,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-    {
-      id: 33,
-      nome: "Mouse Gamer Wireless",
-      categoria: "Periféricos",
-      preco: 210.5,
-    },
-  ]);
+  //const [currentPage, setCurrentPage] = useState(1);
+  //const [itensPerPage, setItensPerPage] = useState(5);
 
   const columnNames = [
     {
@@ -218,44 +19,38 @@ export function VehicleListPage() {
       format: (data: any) => data,
     },
     {
-      field: "nome",
-      label: "Nome",
+      field: "plate",
+      label: "Placa",
       format: (data: any) => data,
     },
     {
-      field: "categoria",
-      label: "Categoria",
+      field: "vehicleType",
+      label: "Tipo de veiculo",
       format: (data: any) => data,
     },
     {
-      field: "preco",
-      label: "Preço",
-      format: (data: any) => "R$ " + data.toFixed(2),
+      field: "mileage",
+      label: "Quilometragem",
+      format: (data: any) => data.toFixed(1) + " Km",
     },
   ];
 
-  const lastItem = currentPage * itensPerPage;
-  const firstItem = lastItem - itensPerPage;
-
-  const paginatedData = itens.slice(firstItem, lastItem);
-
-  const totalItens = 33;
-  const totalPages = Math.ceil(totalItens / itensPerPage);
+  const totalPages = 1; //Math.ceil(totalItens / itensPerPage);
   const changeItemPerPage = (e: any) => {
-    setItensPerPage(Number(e.target.value));
-    setCurrentPage(1);
+    //setItensPerPage(Number(e.target.value));
+    //setCurrentPage(1);
   };
 
   const changePage = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+      //setCurrentPage(newPage);
     }
   };
 
   const navegation = {
-    totalItens: totalItens,
-    currentPage: currentPage,
-    itensPerPage: itensPerPage,
+    totalItens: vehicles.length,
+    currentPage: 1,
+    itensPerPage: 5,
     changePage: changePage,
     changeItemPerPage: changeItemPerPage,
   };
@@ -289,8 +84,9 @@ export function VehicleListPage() {
         </div>
         <Table
           headerTable="Lista de Produtos"
+          isLoading={isLoading}
           columnNames={columnNames}
-          columnValues={paginatedData}
+          columnValues={vehicles}
           navegation={navegation}
         />
       </div>
