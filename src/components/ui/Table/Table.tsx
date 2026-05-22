@@ -1,4 +1,8 @@
-import { PencilLine, Trash2 } from "lucide-react";
+import {
+  PencilLine,
+  Trash2,
+  LoaderCircle,
+} from "lucide-react";
 import PaginatorTable from "./PaginatorTable";
 
 type colNames = {
@@ -6,7 +10,7 @@ type colNames = {
   label: string;
   format: (data: any) => any;
 };
-interface NavegatorTable {
+interface NavegatorProps {
   totalItens: number;
   currentPage: number;
   itensPerPage: number;
@@ -17,8 +21,9 @@ interface TableProps {
   headerTable: string;
   columnNames: colNames[];
   columnValues: any[];
+  isLoading?: boolean;
   messageEmpty?: string;
-  navegation: NavegatorTable;
+  navegation: NavegatorProps;
   colEdit?: boolean;
   colTrash?: boolean;
 }
@@ -27,6 +32,7 @@ export default function Table({
   headerTable,
   columnNames,
   columnValues,
+  isLoading = false,
   messageEmpty,
   navegation,
   colEdit = true,
@@ -36,10 +42,20 @@ export default function Table({
     navegation.totalItens / navegation.itensPerPage
   );
 
+  const messageNoData =
+    messageEmpty != null
+      ? messageEmpty
+      : "Nenhum elemento encontrado.";
+  const spinAnimated = (
+    <span className="flex justify-center">
+      <LoaderCircle className="animate-spin" />
+    </span>
+  );
   return (
     <div className="flex flex-col pt-2">
-      <h2 className="text-center">{headerTable}</h2>
-
+      <h2 className="text-center text-2xl font-semibold text-zinc-700">
+        {headerTable}
+      </h2>
       <table className="mt-2">
         <thead>
           <tr className="border-b-2 text-left border-gray-300">
@@ -62,7 +78,7 @@ export default function Table({
         <tbody>
           {columnValues.map((row, indexRow) => (
             <tr
-              className=" border-b border-zinc-100 "
+              className=" border-b border-zinc-100 hover:bg-slate-200"
               key={row.id || indexRow}
             >
               {columnNames.map((col) => (
@@ -75,29 +91,30 @@ export default function Table({
               ))}
               {colEdit == true && (
                 <td className="p-2">
-                  <div className="p-2 rounded-xl cursor-pointer hover:bg-slate-100">
+                  <div className="p-2 rounded-xl cursor-pointer">
                     <PencilLine size={14} />
                   </div>
                 </td>
               )}
               {colTrash == true && (
                 <td className="p-2 ">
-                  <div className="p-2 rounded-xl cursor-pointer hover:bg-slate-100">
+                  <div className="p-2 rounded-xl cursor-pointer">
                     <Trash2 size={14} />
                   </div>
                 </td>
               )}
             </tr>
           ))}
-          {columnValues.length === 0 && (
+          {(columnValues.length === 0 ||
+            isLoading == true) && (
             <tr>
               <td
                 colSpan="6"
                 className="text-center p-4 text-zinc-400"
               >
-                {messageEmpty != null
-                  ? messageEmpty
-                  : "Nenhum elemento encontrado."}
+                {isLoading == true
+                  ? spinAnimated
+                  : messageNoData}
               </td>
             </tr>
           )}
