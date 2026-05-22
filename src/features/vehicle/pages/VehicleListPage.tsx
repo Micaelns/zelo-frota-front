@@ -38,7 +38,7 @@ export function VehicleListPage() {
           />
         </div>
         <Table
-          headerTable="Lista de Produtos"
+          headerTable="Lista de Veiculos"
           isLoading={isLoading}
           columnNames={columnsMap}
           columnValues={vehicles}
