@@ -13,4 +13,13 @@ export const vehicleTypesMock: VehicleType[] = [
     id: "3",
     name: "Cavalinho",
   },
+  {
+    id: "4",
+    name: "Cavalinho",
+  },
+  ,
+  {
+    id: "5",
+    name: "Cavalinho",
+  },
 ];

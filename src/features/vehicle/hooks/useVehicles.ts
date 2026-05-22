@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
-
 import { vehicleService } from "../../../services/api/vehicle/vehicle.service";
-
 import type { Vehicle } from "../types/vehicle.types";
-import type { NavigationData } from "../../../services/types/navigatorData.types";
-import type { ElementProps } from "../../../services/types/ElementProps.type";
+import type { ElementProps } from "../../../services/types/elementProps.type";
+import { UsePagination } from "../../../hooks/usePagination";
 
 export function useVehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [totalItens, setTotalItens] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [perPage, setPerPage] = useState<number>(5);
+  const { setTotalItems, navigation } = UsePagination();
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     loadVehicles();
-  }, [currentPage, perPage]);
+  }, [navigation.currentPage, navigation.itemPerPage]);
 
   const columnsMap: ElementProps[] = [
     {
@@ -41,37 +37,19 @@ export function useVehicles() {
     },
   ];
 
-  const changePerPage = (e: any) => {
-    setPerPage(e.target.value);
-    setCurrentPage(1);
-  };
-
-  const changePage = (newPage: number) => {
-    if (newPage >= 1 && newPage <= totalItens) {
-      setCurrentPage(newPage);
-    }
-  };
-
-  const navigation: NavigationData = {
-    totalItens: totalItens,
-    totalPages: Math.ceil(totalItens / perPage),
-    currentPage: currentPage,
-    itemPerPage: perPage,
-    changePage: changePage,
-    changePerPage: changePerPage,
-  };
-
   async function loadVehicles() {
     try {
       setIsLoading(true);
-      const skip = currentPage * perPage - perPage;
+      const skip =
+        navigation.currentPage * navigation.itemPerPage -
+        navigation.itemPerPage;
 
       const response = await vehicleService.getAll(
         skip,
-        perPage
+        navigation.itemPerPage
       );
-      setTotalItens(8);
       setVehicles(response);
+      setTotalItems(8);
     } finally {
       setIsLoading(false);
     }
@@ -82,6 +60,5 @@ export function useVehicles() {
     isLoading,
     columnsMap,
     navigation,
-    loadVehicles,
   };
 }
