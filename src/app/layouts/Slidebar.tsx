@@ -2,7 +2,8 @@ import {
   LayoutDashboard,
   Truck,
   Calendar,
-  Users,
+  MapPinned,
+  ClipboardList,
 } from "lucide-react";
 import { SidebarItem } from "./SlidebarItem";
 
@@ -46,7 +47,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
         />
 
         <SidebarItem
-          icon={<Truck />}
+          icon={<MapPinned />}
           label="Viagens"
           route="/"
           collapsed={collapsed}
@@ -60,16 +61,9 @@ export function Sidebar({ collapsed }: SidebarProps) {
         />
 
         <SidebarItem
-          icon={<Truck />}
+          icon={<ClipboardList />}
           label="Tipo de veiculos"
           route="/vehicle-types"
-          collapsed={collapsed}
-        />
-
-        <SidebarItem
-          icon={<Users />}
-          label="Motoristas"
-          route="/"
           collapsed={collapsed}
         />
 
