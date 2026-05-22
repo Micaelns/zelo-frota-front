@@ -13,6 +13,7 @@ import { LoginPage } from "../../pages/LoginPage";
 
 // import { VehicleListPage } from "@/features/vehicle/pages/VehicleListPage";
 import { VehicleListPage } from "../../features/vehicle/pages/VehicleListPage";
+import { VehicleTypeListPage } from "../../features/vehicleType/pages/VehicleTypeListPage";
 
 export function AppRoutes() {
   return (
@@ -30,6 +31,11 @@ export function AppRoutes() {
           <Route
             path="/vehicles"
             element={<VehicleListPage />}
+          />
+
+          <Route
+            path="/vehicle-types"
+            element={<VehicleTypeListPage />}
           />
         </Route>
       </Route>

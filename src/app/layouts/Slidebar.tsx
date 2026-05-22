@@ -60,6 +60,13 @@ export function Sidebar({ collapsed }: SidebarProps) {
         />
 
         <SidebarItem
+          icon={<Truck />}
+          label="Tipo de veiculos"
+          route="/vehicle-types"
+          collapsed={collapsed}
+        />
+
+        <SidebarItem
           icon={<Users />}
           label="Motoristas"
           route="/"
