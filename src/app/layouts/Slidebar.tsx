@@ -49,7 +49,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
         <SidebarItem
           icon={<MapPinned />}
           label="Viagens"
-          route="/"
+          route="/destinations"
           collapsed={collapsed}
         />
 

@@ -14,6 +14,7 @@ import { LoginPage } from "../../pages/LoginPage";
 // import { VehicleListPage } from "@/features/vehicle/pages/VehicleListPage";
 import { VehicleListPage } from "../../features/vehicle/pages/VehicleListPage";
 import { VehicleTypeListPage } from "../../features/vehicleType/pages/VehicleTypeListPage";
+import { DestinationListPage } from "../../features/destination/pages/DestinationListPage";
 
 export function AppRoutes() {
   return (
@@ -28,6 +29,10 @@ export function AppRoutes() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<DashboardPage />} />
 
+          <Route
+            path="/destinations"
+            element={<DestinationListPage />}
+          />
           <Route
             path="/vehicles"
             element={<VehicleListPage />}
