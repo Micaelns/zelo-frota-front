@@ -15,6 +15,8 @@ import { LoginPage } from "../../pages/LoginPage";
 import { VehicleListPage } from "../../features/vehicle/pages/VehicleListPage";
 import { VehicleTypeListPage } from "../../features/vehicleType/pages/VehicleTypeListPage";
 import { DestinationListPage } from "../../features/destination/pages/DestinationListPage";
+import { TravelListPage } from "../../features/travel/pages/TravelListPage";
+import { TravelEndPage } from "../../features/travel/pages/TravelEndPage";
 
 export function AppRoutes() {
   return (
@@ -28,16 +30,22 @@ export function AppRoutes() {
       <Route element={<PrivateRoute />}>
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<DashboardPage />} />
-
           <Route
             path="/destinations"
             element={<DestinationListPage />}
           />
           <Route
+            path="/viagens"
+            element={<TravelListPage />}
+          />
+          <Route
+            path="/viagens/:id/finalizar"
+            element={<TravelEndPage />}
+          />
+          <Route
             path="/vehicles"
             element={<VehicleListPage />}
           />
-
           <Route
             path="/vehicle-types"
             element={<VehicleTypeListPage />}

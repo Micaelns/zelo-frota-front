@@ -5,6 +5,8 @@ type FormInputProps = {
   labelName: string;
   typeField?: HTMLInputTypeAttribute;
   placeholder?: string;
+  value?: string;
+  disabled?: boolean;
   icon?: LucideIcon;
 };
 
@@ -12,6 +14,8 @@ export function FormInput({
   labelName,
   typeField = "text",
   placeholder,
+  value,
+  disabled,
   icon: Icon,
 }: FormInputProps) {
   return (
@@ -47,6 +51,8 @@ export function FormInput({
         <input
           type={typeField}
           placeholder={placeholder}
+          value={value}
+          disabled={disabled}
           className="
             flex-1
             border-none

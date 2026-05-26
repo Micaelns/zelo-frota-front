@@ -4,6 +4,7 @@ import {
   Calendar,
   MapPinned,
   ClipboardList,
+  Route,
 } from "lucide-react";
 import { SidebarItem } from "./SlidebarItem";
 
@@ -48,8 +49,14 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
         <SidebarItem
           icon={<MapPinned />}
-          label="Viagens"
+          label="Destinos"
           route="/destinations"
+          collapsed={collapsed}
+        />
+        <SidebarItem
+          icon={<Route />}
+          label="Viagens"
+          route="/viagens"
           collapsed={collapsed}
         />
 

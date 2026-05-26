@@ -1,5 +1,5 @@
 export interface ElementProps {
   field: string;
   label: string;
-  format: (data: any) => any;
+  format: (data: any, row?: any[]) => any;
 }

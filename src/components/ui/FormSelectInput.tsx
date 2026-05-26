@@ -10,6 +10,7 @@ type FormSelectProps = {
   options: Option[];
   placeholder: string;
   value?: string;
+  disabled?: boolean;
   onChange?: (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => void;
@@ -22,6 +23,7 @@ export function FormSelectInput({
   icon: Icon,
   options,
   value,
+  disabled,
   onChange,
 }: FormSelectProps) {
   return (
@@ -57,6 +59,7 @@ export function FormSelectInput({
         <select
           value={value}
           onChange={onChange}
+          disabled={disabled}
           className="
             flex-1
             border-none

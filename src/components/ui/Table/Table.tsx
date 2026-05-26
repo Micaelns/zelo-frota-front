@@ -45,45 +45,41 @@ export default function Table({
       <table className="mt-2">
         <thead>
           <tr className="border-b-2 text-left border-gray-300">
-            {columnNames.map((col) => (
+            {columnNames.map((col, indexCol) => (
               <th
-                key={col.field}
+                key={`${col.field}-${indexCol}`}
                 className="p-2 font-semibold text-zinc-700"
               >
                 {col.label}
               </th>
             ))}
-            {colEdit == true && (
-              <th className="pl-2 w-0"></th>
-            )}
-            {colTrash == true && (
-              <th className="pl-2 w-0"></th>
-            )}
+            {colEdit && <th className="pl-2 w-0"></th>}
+            {colTrash && <th className="pl-2 w-0"></th>}
           </tr>
         </thead>
         <tbody>
-          {isLoading == false &&
+          {!isLoading &&
             columnValues.map((row, indexRow) => (
               <tr
                 className=" border-b border-zinc-100 hover:bg-slate-200"
                 key={row.id || indexRow}
               >
-                {columnNames.map((col) => (
+                {columnNames.map((col, indexCol) => (
                   <td
-                    key={col.field || col.label}
+                    key={`${col.field}-${indexRow}-${indexCol}`}
                     className="p-2"
                   >
-                    {col.format(row[col.field])}
+                    {col.format(row[col.field], row)}
                   </td>
                 ))}
-                {colEdit == true && (
+                {colEdit && (
                   <td className="p-2">
                     <div className="p-2 rounded-xl cursor-pointer">
                       <PencilLine size={14} />
                     </div>
                   </td>
                 )}
-                {colTrash == true && (
+                {colTrash && (
                   <td className="p-2 ">
                     <div className="p-2 rounded-xl cursor-pointer">
                       <Trash2 size={14} />
@@ -92,8 +88,7 @@ export default function Table({
                 )}
               </tr>
             ))}
-          {(columnValues.length === 0 ||
-            isLoading == true) && (
+          {(columnValues.length === 0 || isLoading) && (
             <tr>
               <td
                 colSpan="6"
