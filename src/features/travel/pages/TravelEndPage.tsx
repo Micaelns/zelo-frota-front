@@ -77,7 +77,10 @@ export function TravelEndPage() {
               <LoaderCircle className="animate-spin" />
             </div>
           ) : travel == null ? (
-            "Nada a mostrar"
+            <EmptyState
+              title="Viagem não encontrada"
+              description="Não foi possível localizar a viagem informada."
+            />
           ) : (
             <form className="flex flex-col gap-4">
               <FormSelectInput
