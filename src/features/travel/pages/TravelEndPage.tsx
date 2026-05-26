@@ -6,15 +6,28 @@ import {
 } from "lucide-react";
 import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useTravels } from "../hooks/useTravels";
 import { useEffect } from "react";
-import { ButtonSave } from "../../../components/ui/ButtonSave";
-import { ButtonDefault } from "../../../components/ui/ButtonDefault";
+import { ButtonsForm } from "../../../components/ui/ButtonsForm";
+import { EmptyState } from "../../../components/ui/EmptyState";
 
 export function TravelEndPage() {
+  const navigate = useNavigate();
   const { loadTravel, travel, isLoading } = useTravels();
   const { id } = useParams<string>();
+  const buttons = {
+    confirm: {
+      text: "Salvar",
+      action: () => {
+        console.log("clicou salvar");
+      },
+    },
+    cancel: {
+      text: "Cancelar",
+      action: () => navigate(-1),
+    },
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -97,17 +110,7 @@ export function TravelEndPage() {
                 icon={Gauge}
                 placeholder="Digite a quilometragem"
               />
-              <div className="flex justify-end gap-2">
-                <ButtonDefault
-                  action={onclose}
-                  label="Cancelar"
-                />
-                <ButtonSave
-                  action={() => console.log("salvou")}
-                  showIcon={false}
-                  label="Salvar"
-                />
-              </div>
+              <ButtonsForm buttonsGroup={buttons} />
             </form>
           )}
         </div>

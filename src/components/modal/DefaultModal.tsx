@@ -1,18 +1,13 @@
 import React, { useRef } from "react";
 import { X } from "lucide-react";
-import { ButtonSave } from "../ui/ButtonSave";
-import { ButtonDefault } from "../ui/ButtonDefault";
-
-interface ButtonConfirm {
-  text: string;
-  action: () => void;
-}
+import { ButtonsForm } from "../ui/ButtonsForm";
+import type { ElementButtonsForm } from "../../services/types/elementButtonsForm.type";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  buttonConfirm?: ButtonConfirm;
+  buttons: ElementButtonsForm;
   children: React.ReactNode;
 }
 
@@ -21,7 +16,7 @@ export default function DefaultModal({
   onClose,
   title,
   children,
-  buttonConfirm = { text: "Confirmar", action: () => "" },
+  buttons,
 }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -69,19 +64,7 @@ export default function DefaultModal({
           {children}
         </div>
 
-        <div className="flex justify-end gap-2 mt-2">
-          <ButtonDefault
-            action={onClose}
-            label="Cancelar"
-          />
-          <ButtonSave
-            action={() => {
-              buttonConfirm.action();
-              onClose();
-            }}
-            label={buttonConfirm.text}
-          />
-        </div>
+        <ButtonsForm buttonsGroup={buttons} />
       </div>
     </dialog>
   );

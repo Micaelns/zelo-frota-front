@@ -1,24 +1,21 @@
 import { Save } from "lucide-react";
-
-type ButtonSaveProps = {
-  label: string;
-  showIcon?: boolean;
-  action: () => void;
-};
+import type { ElementButtonForm } from "../../services/types/elementButtonsForm.type";
 
 export function ButtonSave({
-  label,
-  showIcon = true,
+  text,
+  type = "button",
   action,
-}: ButtonSaveProps) {
+  showIcon = true,
+}: ElementButtonForm) {
   return (
     <div>
       <button
+        type={type}
         onClick={() => action()}
         className="flex flex-row gap-1 items-center px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 text-sm font-medium transition-colors cursor-pointer"
       >
         {showIcon && <Save />}
-        {label}
+        {text}
       </button>
     </div>
   );

@@ -28,10 +28,17 @@ export function DataListLayout({
     setIsOpen(false);
   };
 
-  const buttonConfirm = {
-    text: "Salvar",
-    action: () => {
-      console.log("executou...");
+  const buttons = {
+    confirm: {
+      text: "Salvar",
+      action: () => {
+        console.log("executou...");
+        onClose();
+      },
+    },
+    cancel: {
+      text: "Cancelar",
+      action: onClose,
     },
   };
   return (
@@ -40,7 +47,7 @@ export function DataListLayout({
         isOpen={isOpen}
         onClose={onClose}
         title={modalTitle}
-        buttonConfirm={buttonConfirm}
+        buttons={buttons}
       >
         {formModal}
       </DefaultModal>
@@ -49,7 +56,7 @@ export function DataListLayout({
           <ButtonSave
             action={() => setIsOpen(true)}
             showIcon={false}
-            label="Novo"
+            text="Novo"
           />
         </div>
         <Table

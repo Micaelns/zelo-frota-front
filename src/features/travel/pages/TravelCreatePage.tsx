@@ -1,8 +1,23 @@
 import { MapPinned, Gauge, Truck } from "lucide-react";
 import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
+import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 
 export function TravelCreatePage() {
+  const buttons = {
+    confirm: {
+      text: "Salvar",
+      action: () => {
+        console.log("clicou salvar");
+      },
+    },
+    cancel: {
+      text: "Cancelar",
+      action: () => {
+        console.log("clicou cancelar");
+      },
+    },
+  };
   const optionVehicle = [
     { value: "1", label: "Carreta ASD 5D89" },
     { value: "2", label: "Carreta ASD 5D90" },
@@ -47,6 +62,7 @@ export function TravelCreatePage() {
           icon={Gauge}
           placeholder="Digite a quilometragem"
         />
+        <ButtonsForm buttonsGroup={buttons} />
       </form>
     </div>
   );
