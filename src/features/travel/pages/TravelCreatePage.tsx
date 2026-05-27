@@ -2,8 +2,12 @@ import { MapPinned, Gauge, Truck } from "lucide-react";
 import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
+import { FormElement } from "../../../components/ui/FormElement";
+import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
+import { useNavigate } from "react-router-dom";
 
 export function TravelCreatePage() {
+  const navigate = useNavigate();
   const buttons = {
     confirm: {
       text: "Salvar",
@@ -14,7 +18,7 @@ export function TravelCreatePage() {
     cancel: {
       text: "Cancelar",
       action: () => {
-        console.log("clicou cancelar");
+        navigate("/travels");
       },
     },
   };
@@ -42,8 +46,14 @@ export function TravelCreatePage() {
     },
   ];
   return (
-    <div className="flex flex-col gap-6">
-      <form className="flex flex-col gap-4">
+    <SimplePageLayout
+      isLoading={false}
+      isEmpty={false}
+      title="Formulário Viagem"
+      titleEmpty="Viagem não encontrada"
+      descriptionEmpty="Não foi possível localizar o viagem informada."
+    >
+      <FormElement>
         <FormSelectInput
           labelName="Destino"
           icon={MapPinned}
@@ -63,7 +73,7 @@ export function TravelCreatePage() {
           placeholder="Digite a quilometragem"
         />
         <ButtonsForm buttonsGroup={buttons} />
-      </form>
-    </div>
+      </FormElement>
+    </SimplePageLayout>
   );
 }

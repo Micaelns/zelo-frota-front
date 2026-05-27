@@ -1,6 +1,10 @@
 import { TextCursorInput } from "lucide-react";
 import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
+import { FormElement } from "../../../components/ui/FormElement";
+import { useNavigate } from "react-router-dom";
+import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
+import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 
 export function DestinationCreatePage() {
   const options = [
@@ -32,9 +36,30 @@ export function DestinationCreatePage() {
     { value: "SE", label: "Sergipe" },
     { value: "TO", label: "Tocantins" },
   ];
+  const navigate = useNavigate();
+  const buttons = {
+    confirm: {
+      text: "Salvar",
+      action: () => {
+        console.log("clicou salvar");
+      },
+    },
+    cancel: {
+      text: "Cancelar",
+      action: () => {
+        navigate("/destinations");
+      },
+    },
+  };
   return (
-    <div className="flex flex-col gap-6">
-      <form className="flex flex-col gap-4">
+    <SimplePageLayout
+      isLoading={false}
+      isEmpty={false}
+      title="Formulário de destinos"
+      titleEmpty="Destino não encontrado"
+      descriptionEmpty="Não foi possível localizar o destino informada."
+    >
+      <FormElement>
         <FormInput
           labelName="Cep"
           typeField="text"
@@ -70,7 +95,8 @@ export function DestinationCreatePage() {
           options={options}
           placeholder="Selecione o estado"
         />
-      </form>
-    </div>
+        <ButtonsForm buttonsGroup={buttons} />
+      </FormElement>
+    </SimplePageLayout>
   );
 }

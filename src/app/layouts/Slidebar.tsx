@@ -56,7 +56,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
         <SidebarItem
           icon={<Route />}
           label="Viagens"
-          route="/viagens"
+          route="/travels"
           collapsed={collapsed}
         />
 

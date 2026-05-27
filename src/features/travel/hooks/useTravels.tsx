@@ -78,7 +78,7 @@ export function useTravels() {
             className="p-2 rounded-xl cursor-pointer"
             title="Finalizar viagem"
           >
-            <Link to={`/viagens/${row.idTravel}/finalizar`}>
+            <Link to={`/travels/${row.idTravel}/finish`}>
               <BadgeCheck size={14} />
             </Link>
           </div>

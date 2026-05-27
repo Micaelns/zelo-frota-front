@@ -1,8 +1,10 @@
 import { useDestinations } from "../hooks/useDestination";
-import { DestinationCreatePage } from "./DestinationCreatePage";
 import { DataListLayout } from "../../../app/layouts/DataListLayout";
+import type { ElementButtonForm } from "../../../services/types/elementButtonsForm.type";
+import { useNavigate } from "react-router-dom";
 
 export function DestinationListPage() {
+  const navigate = useNavigate();
   const {
     destinations,
     isLoading,
@@ -10,15 +12,21 @@ export function DestinationListPage() {
     navigation,
   } = useDestinations();
 
+  const buttonDefault: ElementButtonForm = {
+    text: "Novo",
+    action: () => {
+      navigate("/destinations/create");
+    },
+  };
+
   return (
     <DataListLayout
       title="Lista Destinos"
-      modalTitle="Formulário de destinos"
       isLoading={isLoading}
       columns={columnsMap}
       data={destinations}
+      buttonDefault={buttonDefault}
       navigation={navigation}
-      formModal={<DestinationCreatePage />}
     />
   );
 }

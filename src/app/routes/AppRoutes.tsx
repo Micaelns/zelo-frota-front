@@ -5,9 +5,6 @@ import { PublicRoute } from "../guards/PublicRoute";
 
 import { DefaultLayout } from "../layouts/DefaultLayout";
 
-//import { DashboardPage } from "@/features/dashboard/pages/DashboardPage";
-import { DashboardPage } from "../../pages/Dashboard/DashboardPage";
-
 // import { LoginPage } from "@/features/auth/pages/LoginPage";
 import { LoginPage } from "../../pages/LoginPage";
 
@@ -17,6 +14,10 @@ import { VehicleTypeListPage } from "../../features/vehicleType/pages/VehicleTyp
 import { DestinationListPage } from "../../features/destination/pages/DestinationListPage";
 import { TravelListPage } from "../../features/travel/pages/TravelListPage";
 import { TravelEndPage } from "../../features/travel/pages/TravelEndPage";
+import { VehicleTypeCreatePage } from "../../features/vehicleType/pages/VehicleTypeCreatePage";
+import { VehicleCreatePage } from "../../features/vehicle/pages/VehicleCreatePage";
+import { DestinationCreatePage } from "../../features/destination/pages/DestinationCreatePage";
+import { TravelCreatePage } from "../../features/travel/pages/TravelCreatePage";
 
 export function AppRoutes() {
   return (
@@ -29,17 +30,28 @@ export function AppRoutes() {
       {/* PRIVATE */}
       <Route element={<PrivateRoute />}>
         <Route element={<DefaultLayout />}>
-          <Route path="/" element={<DashboardPage />} />
+          <Route
+            path="/"
+            element={<DestinationListPage />}
+          />
           <Route
             path="/destinations"
             element={<DestinationListPage />}
           />
           <Route
-            path="/viagens"
+            path="/destinations/create"
+            element={<DestinationCreatePage />}
+          />
+          <Route
+            path="/travels"
             element={<TravelListPage />}
           />
           <Route
-            path="/viagens/:id/finalizar"
+            path="/travels/create"
+            element={<TravelCreatePage />}
+          />
+          <Route
+            path="/travels/:id/finish"
             element={<TravelEndPage />}
           />
           <Route
@@ -47,8 +59,16 @@ export function AppRoutes() {
             element={<VehicleListPage />}
           />
           <Route
+            path="/vehicles/create"
+            element={<VehicleCreatePage />}
+          />
+          <Route
             path="/vehicle-types"
             element={<VehicleTypeListPage />}
+          />
+          <Route
+            path="/vehicle-types/create"
+            element={<VehicleTypeCreatePage />}
           />
         </Route>
       </Route>

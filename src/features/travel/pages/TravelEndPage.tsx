@@ -1,16 +1,12 @@
-import {
-  MapPinned,
-  Gauge,
-  Truck,
-  LoaderCircle,
-} from "lucide-react";
+import { MapPinned, Gauge, Truck } from "lucide-react";
 import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTravels } from "../hooks/useTravels";
 import { useEffect } from "react";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
-import { EmptyState } from "../../../components/ui/EmptyState";
+import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
+import { FormElement } from "../../../components/ui/FormElement";
 
 export function TravelEndPage() {
   const navigate = useNavigate();
@@ -66,58 +62,46 @@ export function TravelEndPage() {
   ];
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex flex-col items-center bg-white p-4 gap-2 rounded-2xl shadow-sm w-full max-w-2xl">
-        <h2 className="text-2xl font-semibold text-zinc-700">
-          Finalizar viagem
-        </h2>
-        <div className="flex flex-col w-full">
-          {isLoading ? (
-            <div className="flex justify-center">
-              <LoaderCircle className="animate-spin" />
-            </div>
-          ) : travel == null ? (
-            <EmptyState
-              title="Viagem não encontrada"
-              description="Não foi possível localizar a viagem informada."
-            />
-          ) : (
-            <form className="flex flex-col gap-4">
-              <FormSelectInput
-                labelName="Destino"
-                icon={MapPinned}
-                options={optionDestination}
-                value={travel.destinationId}
-                disabled={true}
-                placeholder="Selecione o destino"
-              />
-              <FormSelectInput
-                labelName="Veiculo"
-                icon={Truck}
-                options={optionVehicle}
-                value={travel.vehicleId}
-                disabled={true}
-                placeholder="Selecione o veiculo"
-              />
-              <FormInput
-                labelName="Quilometragem Inicial"
-                typeField="text"
-                icon={Gauge}
-                value={travel.startedMileage?.toString()}
-                disabled={true}
-                placeholder="Digite a quilometragem"
-              />
-              <FormInput
-                labelName="Quilometragem Final"
-                typeField="text"
-                icon={Gauge}
-                placeholder="Digite a quilometragem"
-              />
-              <ButtonsForm buttonsGroup={buttons} />
-            </form>
-          )}
-        </div>
-      </div>
-    </div>
+    <SimplePageLayout
+      isLoading={isLoading}
+      isEmpty={false}
+      title="Formulário Viagem"
+      titleEmpty="Viagem não encontrada"
+      descriptionEmpty="Não foi possível localizar o viagem informada."
+    >
+      <FormElement>
+        <FormSelectInput
+          labelName="Destino"
+          icon={MapPinned}
+          options={optionDestination}
+          value={travel?.destinationId}
+          disabled={true}
+          placeholder="Selecione o destino"
+        />
+        <FormSelectInput
+          labelName="Veiculo"
+          icon={Truck}
+          options={optionVehicle}
+          value={travel?.vehicleId}
+          disabled={true}
+          placeholder="Selecione o veiculo"
+        />
+        <FormInput
+          labelName="Quilometragem Inicial"
+          typeField="text"
+          icon={Gauge}
+          value={travel?.startedMileage?.toString()}
+          disabled={true}
+          placeholder="Digite a quilometragem"
+        />
+        <FormInput
+          labelName="Quilometragem Final"
+          typeField="text"
+          icon={Gauge}
+          placeholder="Digite a quilometragem"
+        />
+        <ButtonsForm buttonsGroup={buttons} />
+      </FormElement>
+    </SimplePageLayout>
   );
 }

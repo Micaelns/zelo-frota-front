@@ -63,8 +63,6 @@ export default function DefaultModal({
         <div className="text-zinc-600 text-sm">
           {children}
         </div>
-
-        <ButtonsForm buttonsGroup={buttons} />
       </div>
     </dialog>
   );
