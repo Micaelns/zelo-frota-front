@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Slidebar";
 import { Topbar } from "./Topbar";
+import { ToastContainer } from "../../components/feedback/ToastContainer";
 
 export function DefaultLayout() {
   const [collapsed, setCollapsed] = useState(true);
@@ -17,6 +18,7 @@ export function DefaultLayout() {
         />
 
         <main className="flex-1 p-6">
+          <ToastContainer />
           <Outlet />
         </main>
       </div>
