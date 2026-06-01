@@ -1,6 +1,6 @@
 export interface ElementButtonForm {
   text: string;
-  type?: "button" | "reset" | "submit" | undefined;
+  type?: "button" | "reset" | "submit";
   showIcon?: boolean;
   action: () => void;
 }

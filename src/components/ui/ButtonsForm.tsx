@@ -16,6 +16,7 @@ export function ButtonsForm({
         text={buttonsGroup.cancel.text}
       />
       <ButtonSave
+        type={buttonsGroup.confirm.type}
         action={() => {
           buttonsGroup.confirm.action();
         }}

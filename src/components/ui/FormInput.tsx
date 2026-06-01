@@ -7,6 +7,7 @@ type FormInputProps = {
   placeholder?: string;
   value?: string;
   disabled?: boolean;
+  onChange?: (e: any) => void;
   icon?: LucideIcon;
 };
 
@@ -16,6 +17,7 @@ export function FormInput({
   placeholder,
   value,
   disabled,
+  onChange,
   icon: Icon,
 }: FormInputProps) {
   return (
@@ -53,6 +55,7 @@ export function FormInput({
           placeholder={placeholder}
           value={value}
           disabled={disabled}
+          onChange={onChange}
           className="
             flex-1
             border-none

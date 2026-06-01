@@ -1,8 +1,11 @@
 import { useVehicleTypes } from "../hooks/useVehicleTypes";
-import { VehicleTypeCreatePage } from "./VehicleTypeCreatePage";
 import { DataListLayout } from "../../../app/layouts/DataListLayout";
+import type { ElementButtonForm } from "../../../services/types/elementButtonsForm.type";
+import { useNavigate } from "react-router-dom";
 
 export function VehicleTypeListPage() {
+  const navigate = useNavigate();
+
   const {
     vehicleTypes,
     isLoading,
@@ -10,15 +13,21 @@ export function VehicleTypeListPage() {
     navigation,
   } = useVehicleTypes();
 
+  const buttonDefault: ElementButtonForm = {
+    text: "Novo",
+    action: () => {
+      navigate("/vehicle-types/create");
+    },
+  };
+
   return (
     <DataListLayout
       title="Lista Tipo de Veículos"
-      modalTitle="Formulário Tipo Veículo"
       isLoading={isLoading}
       columns={columnsMap}
       data={vehicleTypes}
       navigation={navigation}
-      formModal={<VehicleTypeCreatePage />}
+      buttonDefault={buttonDefault}
     />
   );
 }

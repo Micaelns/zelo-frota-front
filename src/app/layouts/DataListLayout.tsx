@@ -8,6 +8,7 @@ type DataListLayoutProps = {
   buttonDefault?: ElementButtonForm;
   columns: any[];
   data: any[];
+  messageEmpty?: string;
   navigation: any;
 };
 
@@ -17,6 +18,7 @@ export function DataListLayout({
   buttonDefault,
   columns,
   data,
+  messageEmpty,
   navigation,
 }: DataListLayoutProps) {
   return (
@@ -33,6 +35,7 @@ export function DataListLayout({
         isLoading={isLoading}
         columnNames={columns}
         columnValues={data}
+        messageEmpty={messageEmpty}
         navigation={navigation}
       />
     </div>
