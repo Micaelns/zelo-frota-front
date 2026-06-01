@@ -3,8 +3,10 @@ import { vehicleTypeService } from "../../../services/api/vehicleType/vehicleTyp
 import type { VehicleType } from "../types/vehicleType.types";
 import type { ElementProps } from "../../../services/types/elementProps.type";
 import { UsePagination } from "../../../hooks/usePagination";
+import { useToast } from "../../../context/toast/useToast";
 
 export function useVehicleTypes() {
+  const { show } = useToast();
   const [vehicleTypes, setVehicleTypes] = useState<
     VehicleType[]
   >([]);
@@ -20,7 +22,8 @@ export function useVehicleTypes() {
     {
       field: "id",
       label: "Id",
-      format: (data: any) => data,
+      format: (data: any) =>
+        "..." + data.substring(data.length - 5),
     },
     {
       field: "name",
@@ -32,16 +35,19 @@ export function useVehicleTypes() {
   async function loadVehicleTypes() {
     try {
       setIsLoading(true);
-      const skip =
-        navigation.currentPage * navigation.itemPerPage -
-        navigation.itemPerPage;
 
       const response = await vehicleTypeService.getAll(
-        skip,
+        navigation.currentPage,
         navigation.itemPerPage
       );
-      setVehicleTypes(response);
-      setTotalItems(6);
+      if (response.error != null && response.error != "") {
+        show({
+          type: "error",
+          message: response.error,
+        });
+      }
+      setVehicleTypes(response.value);
+      setTotalItems(response.pagination.totalItems);
     } finally {
       setIsLoading(false);
     }
