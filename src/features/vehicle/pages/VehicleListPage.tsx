@@ -1,12 +1,28 @@
 import { useVehicles } from "../hooks/useVehicles";
 import { DataListLayout } from "../../../app/layouts/DataListLayout";
 import type { ElementButtonForm } from "../../../services/types/elementButtonsForm.type";
+import { useToast } from "../../../context/toast/useToast";
 import { useNavigate } from "react-router-dom";
 
 export function VehicleListPage() {
   const navigate = useNavigate();
+  const { show } = useToast();
   const { vehicles, isLoading, columnsMap, navigation } =
     useVehicles();
+
+  const actionDelete = async (id: string) => {
+    show({
+      type: "warning",
+      message: "Não implementado",
+    });
+  };
+
+  const actionUpdate = async (id: string) => {
+    show({
+      type: "warning",
+      message: "Não implementado",
+    });
+  };
 
   const buttonDefault: ElementButtonForm = {
     text: "Novo",
@@ -20,8 +36,10 @@ export function VehicleListPage() {
       isLoading={isLoading}
       columns={columnsMap}
       data={vehicles}
-      buttonDefault={buttonDefault}
       navigation={navigation}
+      buttonDefault={buttonDefault}
+      actionUpdate={actionUpdate}
+      actionDelete={actionDelete}
     />
   );
 }

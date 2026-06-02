@@ -5,7 +5,7 @@ import type { ApiResult } from "../../types/apiResult.type";
 
 function getDefaultError(
   perPage?: number
-): ApiResult<VehicleType> {
+): ApiResult<VehicleType[]> {
   return {
     error:
       "Ocorreu um erro interno tente novamente mais tarde",
@@ -35,7 +35,7 @@ export const vehicleTypeService = {
   async getAll(
     page = 1,
     take = 5
-  ): Promise<ApiResult<VehicleType>> {
+  ): Promise<ApiResult<VehicleType[]>> {
     try {
       var result = await api.get("/VehicleType", {
         params: {

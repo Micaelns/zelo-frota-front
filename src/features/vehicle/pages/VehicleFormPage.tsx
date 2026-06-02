@@ -10,14 +10,21 @@ import { FormElement } from "../../../components/ui/FormElement";
 import { useNavigate } from "react-router-dom";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
+import { useToast } from "../../../context/toast/useToast";
+import { useVehicleTypes } from "../../vehicleType/hooks/useVehicleTypes";
 
-export function VehicleCreatePage() {
+export function VehicleFormPage() {
   const navigate = useNavigate();
+  const { vehicleTypes } = useVehicleTypes();
+  const { show } = useToast();
   const buttons = {
     confirm: {
       text: "Salvar",
       action: () => {
-        console.log("clicou salvar");
+        show({
+          type: "warning",
+          message: "Não implementado",
+        });
       },
     },
     cancel: {
@@ -28,13 +35,10 @@ export function VehicleCreatePage() {
     },
   };
 
-  const options = [
-    { value: "1", label: "Cavalinho" },
-    { value: "2", label: "Cavalinho traçado" },
-    { value: "3", label: "Carreta" },
-    { value: "4", label: "Carreta truck" },
-    { value: "5", label: "Caminhão" },
-  ];
+  const options = vehicleTypes.map((item) => {
+    return { value: item.id, label: item.name };
+  });
+
   return (
     <SimplePageLayout
       isLoading={false}

@@ -13,7 +13,7 @@ import { DestinationListPage } from "../../features/destination/pages/Destinatio
 import { TravelListPage } from "../../features/travel/pages/TravelListPage";
 import { TravelEndPage } from "../../features/travel/pages/TravelEndPage";
 import { VehicleTypeFormPage } from "../../features/vehicleType/pages/VehicleTypeFormPage";
-import { VehicleCreatePage } from "../../features/vehicle/pages/VehicleCreatePage";
+import { VehicleFormPage } from "../../features/vehicle/pages/VehicleFormPage";
 import { DestinationCreatePage } from "../../features/destination/pages/DestinationCreatePage";
 import { TravelCreatePage } from "../../features/travel/pages/TravelCreatePage";
 
@@ -58,7 +58,7 @@ export function AppRoutes() {
           />
           <Route
             path="/vehicles/create"
-            element={<VehicleCreatePage />}
+            element={<VehicleFormPage />}
           />
           <Route
             path="/vehicle-types"

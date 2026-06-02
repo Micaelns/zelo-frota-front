@@ -73,13 +73,6 @@ export function Sidebar({ collapsed }: SidebarProps) {
           route="/vehicle-types"
           collapsed={collapsed}
         />
-
-        <SidebarItem
-          icon={<Calendar />}
-          label="Agenda"
-          route="/"
-          collapsed={collapsed}
-        />
       </nav>
     </aside>
   );

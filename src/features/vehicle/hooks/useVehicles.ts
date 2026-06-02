@@ -3,8 +3,10 @@ import { vehicleService } from "../../../services/api/vehicle/vehicle.service";
 import type { Vehicle } from "../types/vehicle.types";
 import type { ElementProps } from "../../../services/types/elementProps.type";
 import { UsePagination } from "../../../hooks/usePagination";
+import { useToast } from "../../../context/toast/useToast";
 
 export function useVehicles() {
+  const { show } = useToast();
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const { setTotalItems, navigation } = UsePagination();
 
@@ -18,7 +20,8 @@ export function useVehicles() {
     {
       field: "id",
       label: "Id",
-      format: (data: any) => data,
+      format: (data: any) =>
+        "..." + data.substring(data.length - 5),
     },
     {
       field: "plate",
@@ -28,7 +31,7 @@ export function useVehicles() {
     {
       field: "vehicleType",
       label: "Tipo de veiculo",
-      format: (data: any) => data,
+      format: (data: any) => data.name,
     },
     {
       field: "mileage",
@@ -40,16 +43,19 @@ export function useVehicles() {
   async function loadVehicles() {
     try {
       setIsLoading(true);
-      const skip =
-        navigation.currentPage * navigation.itemPerPage -
-        navigation.itemPerPage;
 
       const response = await vehicleService.getAll(
-        skip,
+        navigation.currentPage,
         navigation.itemPerPage
       );
-      setVehicles(response);
-      setTotalItems(8);
+      if (response.error != null && response.error != "") {
+        show({
+          type: "error",
+          message: response.error,
+        });
+      }
+      setVehicles(response.value);
+      setTotalItems(response.pagination.totalItems);
     } finally {
       setIsLoading(false);
     }
