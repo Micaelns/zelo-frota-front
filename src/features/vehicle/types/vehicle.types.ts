@@ -4,6 +4,5 @@ export interface Vehicle {
   id: string;
   plate: string;
   vehicleType: VehicleType;
-  vehicleTypeId: string;
   mileage: number;
 }
