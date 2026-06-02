@@ -14,7 +14,7 @@ import { TravelListPage } from "../../features/travel/pages/TravelListPage";
 import { TravelEndPage } from "../../features/travel/pages/TravelEndPage";
 import { VehicleTypeFormPage } from "../../features/vehicleType/pages/VehicleTypeFormPage";
 import { VehicleFormPage } from "../../features/vehicle/pages/VehicleFormPage";
-import { DestinationCreatePage } from "../../features/destination/pages/DestinationCreatePage";
+import { DestinationFormPage } from "../../features/destination/pages/DestinationFormPage";
 import { TravelCreatePage } from "../../features/travel/pages/TravelCreatePage";
 
 export function AppRoutes() {
@@ -38,7 +38,7 @@ export function AppRoutes() {
           />
           <Route
             path="/destinations/create"
-            element={<DestinationCreatePage />}
+            element={<DestinationFormPage />}
           />
           <Route
             path="/travels"

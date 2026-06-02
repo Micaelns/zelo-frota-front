@@ -5,8 +5,9 @@ import { FormElement } from "../../../components/ui/FormElement";
 import { useNavigate } from "react-router-dom";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
+import { useToast } from "../../../context/toast/useToast";
 
-export function DestinationCreatePage() {
+export function DestinationFormPage() {
   const options = [
     { value: "AC", label: "Acre" },
     { value: "AL", label: "Alagoas" },
@@ -37,11 +38,15 @@ export function DestinationCreatePage() {
     { value: "TO", label: "Tocantins" },
   ];
   const navigate = useNavigate();
+  const { show } = useToast();
   const buttons = {
     confirm: {
       text: "Salvar",
       action: () => {
-        console.log("clicou salvar");
+        show({
+          type: "warning",
+          message: "Não implementado",
+        });
       },
     },
     cancel: {
