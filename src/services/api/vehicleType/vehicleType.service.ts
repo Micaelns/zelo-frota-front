@@ -3,6 +3,34 @@ import { api } from "../../../services/api/api";
 import type { VehicleType } from "../../../features/vehicleType/types/vehicleType.types";
 import type { ApiResult } from "../../types/apiResult.type";
 
+function getDefaultError(
+  perPage?: number
+): ApiResult<VehicleType> {
+  return {
+    error:
+      "Ocorreu um erro interno tente novamente mais tarde",
+    pagination: {
+      currentPage: 1,
+      perPage: perPage,
+      totalItems: 0,
+      totalPages: 0,
+    },
+    isSuccess: false,
+    value: [],
+  };
+}
+
+function getFormatedError(e: unknown) {
+  if (
+    e.response?.data?.error !== undefined &&
+    e.response?.data?.error !== ""
+  ) {
+    return e.response?.data;
+  }
+
+  return getDefaultError(null);
+}
+
 export const vehicleTypeService = {
   async getAll(
     page = 1,
@@ -17,18 +45,7 @@ export const vehicleTypeService = {
       });
       return result.data;
     } catch (e) {
-      const result: ApiResult<VehicleType> = {
-        error:
-          "Servidor ou serviço VehicleType indisponível no momento",
-        pagination: {
-          currentPage: 1,
-          perPage: take,
-          totalItems: 0,
-          totalPages: 0,
-        },
-        value: [],
-      };
-      return result;
+      return getDefaultError(take);
     }
   },
 
@@ -39,6 +56,33 @@ export const vehicleTypeService = {
       });
     } catch (e) {
       return;
+    }
+  },
+
+  async update(form: VehicleType) {
+    try {
+      await api.put("/VehicleType/" + form.id, {
+        ...form,
+      });
+    } catch (e) {
+      return getFormatedError(e);
+    }
+  },
+
+  async Find(id: string): Promise<ApiResult<VehicleType>> {
+    try {
+      var result = await api.get("/VehicleType/" + id);
+      return result.data;
+    } catch (e) {
+      return getFormatedError(e);
+    }
+  },
+
+  async Delete(id: string) {
+    try {
+      await api.delete("/VehicleType/" + id);
+    } catch (e) {
+      return getDefaultError(null);
     }
   },
 };

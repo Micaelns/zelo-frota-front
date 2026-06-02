@@ -5,16 +5,14 @@ import { PublicRoute } from "../guards/PublicRoute";
 
 import { DefaultLayout } from "../layouts/DefaultLayout";
 
-// import { LoginPage } from "@/features/auth/pages/LoginPage";
 import { LoginPage } from "../../pages/LoginPage";
 
-// import { VehicleListPage } from "@/features/vehicle/pages/VehicleListPage";
 import { VehicleListPage } from "../../features/vehicle/pages/VehicleListPage";
 import { VehicleTypeListPage } from "../../features/vehicleType/pages/VehicleTypeListPage";
 import { DestinationListPage } from "../../features/destination/pages/DestinationListPage";
 import { TravelListPage } from "../../features/travel/pages/TravelListPage";
 import { TravelEndPage } from "../../features/travel/pages/TravelEndPage";
-import { VehicleTypeCreatePage } from "../../features/vehicleType/pages/VehicleTypeCreatePage";
+import { VehicleTypeFormPage } from "../../features/vehicleType/pages/VehicleTypeFormPage";
 import { VehicleCreatePage } from "../../features/vehicle/pages/VehicleCreatePage";
 import { DestinationCreatePage } from "../../features/destination/pages/DestinationCreatePage";
 import { TravelCreatePage } from "../../features/travel/pages/TravelCreatePage";
@@ -68,7 +66,11 @@ export function AppRoutes() {
           />
           <Route
             path="/vehicle-types/create"
-            element={<VehicleTypeCreatePage />}
+            element={<VehicleTypeFormPage />}
+          />
+          <Route
+            path="/vehicle-types/edit/:id"
+            element={<VehicleTypeFormPage />}
           />
         </Route>
       </Route>

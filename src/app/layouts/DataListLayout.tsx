@@ -10,6 +10,8 @@ type DataListLayoutProps = {
   data: any[];
   messageEmpty?: string;
   navigation: any;
+  actionUpdate: (id: string) => void;
+  actionDelete: (id: string) => void;
 };
 
 export function DataListLayout({
@@ -20,6 +22,8 @@ export function DataListLayout({
   data,
   messageEmpty,
   navigation,
+  actionUpdate,
+  actionDelete,
 }: DataListLayoutProps) {
   return (
     <div className="flex flex-col justify-center bg-white p-4 gap-2">
@@ -37,6 +41,8 @@ export function DataListLayout({
         columnValues={data}
         messageEmpty={messageEmpty}
         navigation={navigation}
+        actionUpdate={actionUpdate}
+        actionDelete={actionDelete}
       />
     </div>
   );

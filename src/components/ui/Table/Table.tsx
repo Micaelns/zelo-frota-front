@@ -16,6 +16,8 @@ interface TableProps {
   navigation: NavigationData;
   colEdit?: boolean;
   colTrash?: boolean;
+  actionUpdate: (id: string) => void;
+  actionDelete: (id: string) => void;
 }
 
 export default function Table({
@@ -27,6 +29,8 @@ export default function Table({
   navigation,
   colEdit = true,
   colTrash = true,
+  actionUpdate,
+  actionDelete,
 }: TableProps) {
   const messageNoData =
     messageEmpty != null
@@ -74,14 +78,36 @@ export default function Table({
                 ))}
                 {colEdit && (
                   <td className="p-2">
-                    <div className="p-2 rounded-xl cursor-pointer">
+                    <div
+                      className="p-2 rounded-xl cursor-pointer"
+                      onClick={() => {
+                        if (actionUpdate === undefined) {
+                          console.log(
+                            "Ação Update não foi implementada"
+                          );
+                          return;
+                        }
+                        actionUpdate(row.id);
+                      }}
+                    >
                       <PencilLine size={14} />
                     </div>
                   </td>
                 )}
                 {colTrash && (
                   <td className="p-2 ">
-                    <div className="p-2 rounded-xl cursor-pointer">
+                    <div
+                      className="p-2 rounded-xl cursor-pointer"
+                      onClick={() => {
+                        if (actionDelete === undefined) {
+                          console.log(
+                            "Ação Delete não foi implementada"
+                          );
+                          return;
+                        }
+                        actionDelete(row.id);
+                      }}
+                    >
                       <Trash2 size={14} />
                     </div>
                   </td>

@@ -55,6 +55,9 @@ export function useVehicleTypes() {
 
   return {
     vehicleTypes,
+    reloadData: () => {
+      loadVehicleTypes();
+    },
     isLoading,
     columnsMap,
     navigation,

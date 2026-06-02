@@ -4,14 +4,31 @@ import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { FormElement } from "../../../components/ui/FormElement";
 import { useNavigate } from "react-router-dom";
-import { useVehicleTypesForm } from "../../vehicleType/hooks/useVehicleTypeForm";
-import { type SubmitEvent } from "react";
+import { useVehicleTypesForm } from "../hooks/useVehicleTypeForm";
+import { useEffect, type SubmitEvent } from "react";
 import type { ElementButtonsForm } from "../../../services/types/elementButtonsForm.type";
+import { useParams } from "react-router-dom";
 
-export function VehicleTypeCreatePage() {
-  const { form, changeField, submitForm } =
-    useVehicleTypesForm();
+export function VehicleTypeFormPage() {
+  const {
+    form,
+    findVehicleType,
+    changeField,
+    submitCreate,
+    submitUpdate,
+  } = useVehicleTypesForm();
+
   const navigate = useNavigate();
+
+  const { id } = useParams();
+  const isEdit = id !== undefined;
+
+  useEffect(() => {
+    if (!id) return;
+
+    findVehicleType(id);
+  }, [id]);
+
   const buttons: ElementButtonsForm = {
     confirm: {
       text: "Salvar",
@@ -29,7 +46,11 @@ export function VehicleTypeCreatePage() {
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
-    await submitForm();
+    if (isEdit) {
+      await submitUpdate();
+    } else {
+      await submitCreate();
+    }
     navigate("/vehicle-types");
   }
 
