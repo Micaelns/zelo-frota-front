@@ -6,7 +6,7 @@ import { useVehicleTypesForm } from "../hooks/useVehicleTypeForm";
 
 export function VehicleTypeListPage() {
   const navigate = useNavigate();
-  const { submitDelete } = useVehicleTypesForm();
+  const { remove } = useVehicleTypesForm();
   const {
     vehicleTypes,
     reloadData,
@@ -16,7 +16,7 @@ export function VehicleTypeListPage() {
   } = useVehicleTypes();
 
   const actionDelete = async (id: string) => {
-    await submitDelete(id);
+    await remove(id);
     reloadData();
   };
 

@@ -10,23 +10,17 @@ import type { ElementButtonsForm } from "../../../services/types/elementButtonsF
 import { useParams } from "react-router-dom";
 
 export function VehicleTypeFormPage() {
-  const {
-    form,
-    findVehicleType,
-    changeField,
-    submitCreate,
-    submitUpdate,
-  } = useVehicleTypesForm();
+  const { form, find, changeField, save } =
+    useVehicleTypesForm();
 
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const isEdit = id !== undefined;
 
   useEffect(() => {
     if (!id) return;
 
-    findVehicleType(id);
+    find(id);
   }, [id]);
 
   const buttons: ElementButtonsForm = {
@@ -46,11 +40,7 @@ export function VehicleTypeFormPage() {
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
-    if (isEdit) {
-      await submitUpdate();
-    } else {
-      await submitCreate();
-    }
+    await save();
     navigate("/vehicle-types");
   }
 

@@ -19,7 +19,7 @@ export function useVehicleTypesForm() {
     }));
   }
 
-  async function findVehicleType(id: string) {
+  async function find(id: string) {
     const vehicleType = await vehicleTypeService.Find(id);
     if (!vehicleType.isSuccess) {
       show({
@@ -38,7 +38,17 @@ export function useVehicleTypesForm() {
     });
   }
 
-  async function submitCreate() {
+  async function save() {
+    if (form.id != "") {
+      await vehicleTypeService.update(form);
+      show({
+        type: "success",
+        message:
+          "Edição do Tipo de Veículo feito com sucesso!",
+      });
+      return;
+    }
+
     await vehicleTypeService.create(form);
     show({
       type: "success",
@@ -47,16 +57,7 @@ export function useVehicleTypesForm() {
     });
   }
 
-  async function submitUpdate() {
-    await vehicleTypeService.update(form);
-    show({
-      type: "success",
-      message:
-        "Edição do Tipo de Veículo feito com sucesso!",
-    });
-  }
-
-  async function submitDelete(id: string) {
+  async function remove(id: string) {
     await vehicleTypeService.Delete(id);
     show({
       type: "success",
@@ -68,9 +69,8 @@ export function useVehicleTypesForm() {
   return {
     form,
     changeField,
-    findVehicleType,
-    submitCreate,
-    submitUpdate,
-    submitDelete,
+    find,
+    save,
+    remove,
   };
 }
