@@ -15,7 +15,7 @@ import { useVehicleTypes } from "../../vehicleType/hooks/useVehicleTypes";
 
 export function VehicleFormPage() {
   const navigate = useNavigate();
-  const { vehicleTypes } = useVehicleTypes();
+  const { optionsVehicleType } = useVehicleTypes();
   const { show } = useToast();
   const buttons = {
     confirm: {
@@ -35,10 +35,6 @@ export function VehicleFormPage() {
     },
   };
 
-  const options = vehicleTypes.map((item) => {
-    return { value: item.id, label: item.name };
-  });
-
   return (
     <SimplePageLayout
       isLoading={false}
@@ -57,7 +53,7 @@ export function VehicleFormPage() {
         <FormSelectInput
           labelName="Tipo de Veículo"
           icon={Truck}
-          options={options}
+          options={optionsVehicleType}
           placeholder="Selecione o tipo"
         />
         <FormInput

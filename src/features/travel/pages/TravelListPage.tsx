@@ -1,12 +1,43 @@
 import { DataListLayout } from "../../../app/layouts/DataListLayout";
 import type { ElementButtonForm } from "../../../services/types/elementButtonsForm.type";
 import { useTravels } from "../hooks/useTravels";
-import { useNavigate } from "react-router-dom";
+import { useToast } from "../../../context/toast/useToast";
+import {
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 
 export function TravelListPage() {
+  const { vehicleId } = useParams<string>();
+  const [searchParams] = useSearchParams();
+  const titlePage =
+    "Lista Viagens " +
+    searchParams.get("type") +
+    " [ " +
+    searchParams.get("plate") +
+    " ] ";
   const navigate = useNavigate();
+  const { show } = useToast();
+  if (!vehicleId) {
+    return "Veículo não informado";
+  }
   const { travels, isLoading, columnsMap, navigation } =
-    useTravels();
+    useTravels({ vehicleId });
+
+  const actionDelete = async (id: string) => {
+    show({
+      type: "warning",
+      message: "Não implementado",
+    });
+  };
+
+  const actionUpdate = async (id: string) => {
+    show({
+      type: "warning",
+      message: "Não implementado",
+    });
+  };
 
   const buttonDefault: ElementButtonForm = {
     text: "Novo",
@@ -17,12 +48,14 @@ export function TravelListPage() {
 
   return (
     <DataListLayout
-      title="Lista Viagens"
+      title={titlePage}
       isLoading={isLoading}
       columns={columnsMap}
       data={travels}
-      buttonDefault={buttonDefault}
       navigation={navigation}
+      buttonDefault={buttonDefault}
+      actionUpdate={actionUpdate}
+      actionDelete={actionDelete}
     />
   );
 }

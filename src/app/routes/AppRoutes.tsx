@@ -15,7 +15,7 @@ import { TravelEndPage } from "../../features/travel/pages/TravelEndPage";
 import { VehicleTypeFormPage } from "../../features/vehicleType/pages/VehicleTypeFormPage";
 import { VehicleFormPage } from "../../features/vehicle/pages/VehicleFormPage";
 import { DestinationFormPage } from "../../features/destination/pages/DestinationFormPage";
-import { TravelCreatePage } from "../../features/travel/pages/TravelCreatePage";
+import { TravelFormPage } from "../../features/travel/pages/TravelFormPage";
 
 export function AppRoutes() {
   return (
@@ -41,12 +41,8 @@ export function AppRoutes() {
             element={<DestinationFormPage />}
           />
           <Route
-            path="/travels"
-            element={<TravelListPage />}
-          />
-          <Route
             path="/travels/create"
-            element={<TravelCreatePage />}
+            element={<TravelFormPage />}
           />
           <Route
             path="/travels/:id/finish"
@@ -59,6 +55,10 @@ export function AppRoutes() {
           <Route
             path="/vehicles/create"
             element={<VehicleFormPage />}
+          />
+          <Route
+            path="/vehicles/:vehicleId/travels"
+            element={<TravelListPage />}
           />
           <Route
             path="/vehicle-types"

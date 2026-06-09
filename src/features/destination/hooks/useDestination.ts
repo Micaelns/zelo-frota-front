@@ -4,12 +4,20 @@ import type { Destination } from "../type/destination.types";
 import type { ElementProps } from "../../../services/types/elementProps.type";
 import { UsePagination } from "../../../hooks/usePagination";
 import { useToast } from "../../../context/toast/useToast";
+import type { OptionsSelect } from "../../../services/types/optionsSelect.type";
 
 export function useDestinations() {
   const { show } = useToast();
   const [destinations, setDestinations] = useState<
     Destination[]
   >([]);
+  const optionsDestination: OptionsSelect[] =
+    destinations.map((item) => {
+      return {
+        value: item.id,
+        label: item.city + " " + item.uf,
+      };
+    });
   const { setTotalItems, navigation } = UsePagination();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -75,6 +83,7 @@ export function useDestinations() {
 
   return {
     destinations,
+    optionsDestination,
     isLoading,
     columnsMap,
     navigation,

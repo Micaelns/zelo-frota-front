@@ -4,47 +4,34 @@ import { FormSelectInput } from "../../../components/ui/FormSelectInput";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 import { FormElement } from "../../../components/ui/FormElement";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
+import { useToast } from "../../../context/toast/useToast";
 import { useNavigate } from "react-router-dom";
+import { useDestinations } from "../../destination/hooks/useDestination";
+import { useVehicles } from "../../vehicle/hooks/useVehicles";
 
-export function TravelCreatePage() {
+export function TravelFormPage() {
   const navigate = useNavigate();
+  const { optionsDestination } = useDestinations();
+  const { optionsVehicle } = useVehicles();
+  const { show } = useToast();
   const buttons = {
     confirm: {
       text: "Salvar",
       action: () => {
-        console.log("clicou salvar");
+        show({
+          type: "warning",
+          message: "Não implementado",
+        });
       },
     },
     cancel: {
       text: "Cancelar",
       action: () => {
-        navigate("/travels");
+        navigate(-1);
       },
     },
   };
-  const optionVehicle = [
-    { value: "1", label: "Carreta ASD 5D89" },
-    { value: "2", label: "Carreta ASD 5D90" },
-    { value: "3", label: "Carreta ASD 5D91" },
-    { value: "4", label: "Carreta ASD 5D92" },
-  ];
-  const optionDestination = [
-    { value: "1", label: "Acajutiba-Ba" },
-    { value: "2", label: "Aracaju-Se" },
-    {
-      value: "3",
-      label: "Nossa senhora do Socorro-Se CEP:49160-000",
-    },
-    {
-      value: "4",
-      label:
-        "São Bras, Nossa Senhora do Socorro-Se CEP: 49156-790",
-    },
-    {
-      value: "5",
-      label: "Rua Bahia, Acajutiba - Ba CEP: 49360-000",
-    },
-  ];
+
   return (
     <SimplePageLayout
       isLoading={false}
@@ -57,18 +44,24 @@ export function TravelCreatePage() {
         <FormSelectInput
           labelName="Destino"
           icon={MapPinned}
-          options={optionDestination}
+          options={optionsDestination}
           placeholder="Selecione o destino"
         />
         <FormSelectInput
           labelName="Veiculo"
           icon={Truck}
-          options={optionVehicle}
+          options={optionsVehicle}
           placeholder="Selecione o veiculo"
         />
         <FormInput
           labelName="Quilometragem Inicial"
           typeField="number"
+          icon={Gauge}
+          placeholder="Digite a quilometragem"
+        />
+        <FormInput
+          labelName="Quilometragem Final"
+          typeField="text"
           icon={Gauge}
           placeholder="Digite a quilometragem"
         />

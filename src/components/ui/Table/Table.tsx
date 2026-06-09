@@ -117,7 +117,7 @@ export default function Table({
           {(columnValues.length === 0 || isLoading) && (
             <tr>
               <td
-                colSpan="6"
+                colSpan={columnNames.length}
                 className="text-center p-4 text-zinc-400"
               >
                 {isLoading == true

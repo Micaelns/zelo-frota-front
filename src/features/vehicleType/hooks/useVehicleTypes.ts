@@ -4,6 +4,7 @@ import type { VehicleType } from "../types/vehicleType.types";
 import type { ElementProps } from "../../../services/types/elementProps.type";
 import { UsePagination } from "../../../hooks/usePagination";
 import { useToast } from "../../../context/toast/useToast";
+import type { OptionsSelect } from "../../../services/types/optionsSelect.type";
 
 export function useVehicleTypes() {
   const { show } = useToast();
@@ -13,6 +14,13 @@ export function useVehicleTypes() {
   const { setTotalItems, navigation } = UsePagination();
 
   const [isLoading, setIsLoading] = useState(false);
+  const optionsVehicleType: OptionsSelect[] =
+    vehicleTypes.map((item) => {
+      return {
+        value: item.id,
+        label: item.name,
+      };
+    });
 
   useEffect(() => {
     loadVehicleTypes();
@@ -55,6 +63,7 @@ export function useVehicleTypes() {
 
   return {
     vehicleTypes,
+    optionsVehicleType,
     reloadData: () => {
       loadVehicleTypes();
     },

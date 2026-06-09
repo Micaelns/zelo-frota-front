@@ -1,26 +1,49 @@
-import { travelsMock } from "../../../features/travel/mocks/travel.mocks";
-
 import type { Travel } from "../../../features/travel/types/travel.types";
+import type { ApiResult } from "../../types/apiResult.type";
+import { api } from "../api";
+
+function getDefaultError(
+  perPage?: number
+): ApiResult<Travel[]> {
+  return {
+    error:
+      "Ocorreu um erro interno tente novamente mais tarde",
+    pagination: {
+      currentPage: 1,
+      perPage: perPage,
+      totalItems: 0,
+      totalPages: 0,
+    },
+    isSuccess: false,
+    value: [],
+  };
+}
 
 export const travelService = {
-  async getAll(skip = 0, take = 5): Promise<Travel[]> {
-    await new Promise((resolve) =>
-      setTimeout(resolve, 500)
-    );
-
-    return travelsMock.slice(skip, skip + take);
-  },
-  async find(id: string): Promise<Travel | null> {
-    await new Promise((resolve) =>
-      setTimeout(resolve, 500)
-    );
-    const travel = travelsMock.find(
-      (item) => item.idTravel === id
-    );
-
-    if (!travel) {
-      return null;
+  async getAll(
+    vehicleId: string,
+    page = 1,
+    take = 5
+  ): Promise<ApiResult<Travel[]>> {
+    try {
+      var result = await api.get(
+        "/Vehicle/" + vehicleId + "/travels",
+        {
+          params: {
+            page,
+            take,
+          },
+        }
+      );
+      return result.data;
+    } catch (e) {
+      return getDefaultError(take);
     }
-    return travel;
+  },
+  async find(travelId: string): Promise<ApiResult<Travel>> {
+    var result = await api.get(
+      "/Vehicle/travels/" + travelId
+    );
+    return result;
   },
 };

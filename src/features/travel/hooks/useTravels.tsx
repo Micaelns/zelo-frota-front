@@ -3,10 +3,15 @@ import { travelService } from "../../../services/api/travel/travel.service";
 import type { ElementProps } from "../../../services/types/elementProps.type";
 import { UsePagination } from "../../../hooks/usePagination";
 import type { Travel } from "../types/travel.types";
+import { useToast } from "../../../context/toast/useToast";
 import { BadgeCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export function useTravels() {
+type TravelsProps = {
+  vehicleId: string;
+};
+export function useTravels({ vehicleId }: TravelsProps) {
+  const { show } = useToast();
   const [travels, setTravels] = useState<Travel[]>([]);
   const [travel, setTravel] = useState<Travel | null>();
   const { setTotalItems, navigation } = UsePagination();
@@ -14,7 +19,7 @@ export function useTravels() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    loadTravels();
+    if (vehicleId != "") loadTravels(vehicleId);
   }, [navigation.currentPage, navigation.itemPerPage]);
 
   const columnsMap: ElementProps[] = [
@@ -23,16 +28,6 @@ export function useTravels() {
       label: "IdTravel",
       format: (data: any) =>
         "..." + data.substring(data.length - 5),
-    },
-    {
-      field: "vehiclePlate",
-      label: "Placa",
-      format: (data: any) => data,
-    },
-    {
-      field: "vehicle",
-      label: "Tipo de veiculo",
-      format: (data: any) => data,
     },
     {
       field: "destination",
@@ -86,19 +81,22 @@ export function useTravels() {
     },
   ];
 
-  async function loadTravels() {
+  async function loadTravels(vehicleId: string) {
     try {
       setIsLoading(true);
-      const skip =
-        navigation.currentPage * navigation.itemPerPage -
-        navigation.itemPerPage;
-
       const response = await travelService.getAll(
-        skip,
+        vehicleId,
+        navigation.currentPage,
         navigation.itemPerPage
       );
-      setTravels(response);
-      setTotalItems(6);
+      if (response.error != null && response.error != "") {
+        show({
+          type: "error",
+          message: response.error,
+        });
+      }
+      setTravels(response.value);
+      setTotalItems(response.pagination.totalItems);
     } finally {
       setIsLoading(false);
     }

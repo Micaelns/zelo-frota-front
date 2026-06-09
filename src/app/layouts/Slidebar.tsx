@@ -1,10 +1,8 @@
 import {
   LayoutDashboard,
   Truck,
-  Calendar,
   MapPinned,
   ClipboardList,
-  Route,
 } from "lucide-react";
 import { SidebarItem } from "./SlidebarItem";
 
@@ -53,13 +51,6 @@ export function Sidebar({ collapsed }: SidebarProps) {
           route="/destinations"
           collapsed={collapsed}
         />
-        <SidebarItem
-          icon={<Route />}
-          label="Viagens"
-          route="/travels"
-          collapsed={collapsed}
-        />
-
         <SidebarItem
           icon={<Truck />}
           label="Veiculos"
