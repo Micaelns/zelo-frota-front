@@ -5,23 +5,15 @@ import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { FormElement } from "../../../components/ui/FormElement";
 import { useNavigate } from "react-router-dom";
 import { useVehicleTypesForm } from "../hooks/useVehicleTypeForm";
-import { useEffect, type SubmitEvent } from "react";
 import type { ElementButtonsForm } from "../../../services/types/elementButtonsForm.type";
 import { useParams } from "react-router-dom";
 
 export function VehicleTypeFormPage() {
-  const { form, find, changeField, save } =
-    useVehicleTypesForm();
+  const { id } = useParams();
+  const { form, changeField, save } =
+    useVehicleTypesForm(id);
 
   const navigate = useNavigate();
-
-  const { id } = useParams();
-
-  useEffect(() => {
-    if (!id) return;
-
-    find(id);
-  }, [id]);
 
   const buttons: ElementButtonsForm = {
     confirm: {

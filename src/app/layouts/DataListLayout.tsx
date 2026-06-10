@@ -1,15 +1,17 @@
 import Table from "../../components/ui/Table/Table";
 import { ButtonSave } from "../../components/ui/ButtonSave";
 import type { ElementButtonForm } from "../../services/types/elementButtonsForm.type";
+import type { ElementProps } from "../../services/types/elementProps.type";
+import type { NavigationData } from "../../services/types/navigatorData.type";
 
-type DataListLayoutProps = {
+type DataListLayoutProps<T> = {
   title: string;
   isLoading?: boolean;
   buttonDefault?: ElementButtonForm;
-  columns: any[];
-  data: any[];
+  columns: ElementProps<T>[];
+  data: T[];
   messageEmpty?: string;
-  navigation: any;
+  navigation: NavigationData;
   actionUpdate: (id: string) => void;
   actionDelete: (id: string) => void;
 };

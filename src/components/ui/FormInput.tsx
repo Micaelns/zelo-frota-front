@@ -7,7 +7,9 @@ type FormInputProps = {
   placeholder?: string;
   value?: string;
   disabled?: boolean;
-  onChange?: (e: any) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => void;
   icon?: LucideIcon;
 };
 

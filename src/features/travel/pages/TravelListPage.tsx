@@ -19,12 +19,13 @@ export function TravelListPage() {
     " ] ";
   const navigate = useNavigate();
   const { show } = useToast();
+
+  const { travels, isLoading, columnsMap, navigation } =
+    useTravels({ vehicleId: vehicleId ?? "" });
+
   if (!vehicleId) {
     return "Veículo não informado";
   }
-  const { travels, isLoading, columnsMap, navigation } =
-    useTravels({ vehicleId });
-
   const actionDelete = async (id: string) => {
     show({
       type: "warning",

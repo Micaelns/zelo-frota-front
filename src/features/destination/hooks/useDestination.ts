@@ -55,6 +55,7 @@ export function useDestinations() {
     navigation.itemPerPage,
     setTotalItems,
     setDestinations,
+    show,
   ]);
 
   const columnsMap: ElementProps<Destination>[] = [

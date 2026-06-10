@@ -7,10 +7,10 @@ import PaginatorTable from "./PaginatorTable";
 import type { NavigationData } from "../../../services/types/navigatorData.type";
 import type { ElementProps } from "../../../../src/services/types/elementProps.type";
 
-interface TableProps {
+interface TableProps<T> {
   headerTable: string;
-  columnNames: ElementProps<any>[];
-  columnValues: any[];
+  columnNames: ElementProps<T>[];
+  columnValues: T[];
   isLoading?: boolean;
   messageEmpty?: string;
   navigation: NavigationData;

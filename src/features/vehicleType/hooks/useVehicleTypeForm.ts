@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { VehicleType } from "../types/vehicleType.types";
 import { vehicleTypeService } from "../../../services/api/vehicleType/vehicleType.service";
 import { useToast } from "../../../context/toast/useToast";
 import { useNavigate } from "react-router-dom";
 
-export function useVehicleTypesForm() {
+export function useVehicleTypesForm(id?: string) {
   const navigate = useNavigate();
   const { show } = useToast();
   const [form, setForm] = useState<VehicleType>({
@@ -12,30 +12,35 @@ export function useVehicleTypesForm() {
     name: "",
   });
 
+  useEffect(() => {
+    if (!id) return;
+
+    const find = async (id: string) => {
+      const vehicleType = await vehicleTypeService.Find(id);
+      if (!vehicleType.isSuccess || !vehicleType.value) {
+        show({
+          type: "error",
+          message: vehicleType.error,
+        });
+        setTimeout(() => {
+          navigate("/vehicle-types");
+        }, 1000);
+        return;
+      }
+
+      setForm({
+        id: vehicleType.value.id,
+        name: vehicleType.value.name,
+      });
+    };
+    find(id);
+  }, [id, setForm, show, navigate]);
+
   function changeField(field: string, value: unknown) {
     setForm((prev) => ({
       ...prev,
       [field]: value,
     }));
-  }
-
-  async function find(id: string) {
-    const vehicleType = await vehicleTypeService.Find(id);
-    if (!vehicleType.isSuccess || !vehicleType.value) {
-      show({
-        type: "error",
-        message: vehicleType.error,
-      });
-      setTimeout(() => {
-        navigate("/vehicle-types");
-      }, 1000);
-      return;
-    }
-
-    setForm({
-      id: vehicleType.value.id,
-      name: vehicleType.value.name,
-    });
   }
 
   async function save() {
@@ -69,7 +74,6 @@ export function useVehicleTypesForm() {
   return {
     form,
     changeField,
-    find,
     save,
     remove,
   };
