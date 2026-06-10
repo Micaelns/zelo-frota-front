@@ -8,6 +8,6 @@ interface paginate {
 export interface ApiResult<T> {
   isSuccess: boolean;
   error: string;
-  value: T;
+  value?: T;
   pagination: paginate;
 }

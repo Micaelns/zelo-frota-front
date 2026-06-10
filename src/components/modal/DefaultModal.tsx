@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { X } from "lucide-react";
-import { ButtonsForm } from "../ui/ButtonsForm";
 import type { ElementButtonsForm } from "../../services/types/elementButtonsForm.type";
 
 interface ModalProps {
@@ -16,7 +15,6 @@ export default function DefaultModal({
   onClose,
   title,
   children,
-  buttons,
 }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 

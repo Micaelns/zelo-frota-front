@@ -4,8 +4,8 @@ import {
   LoaderCircle,
 } from "lucide-react";
 import PaginatorTable from "./PaginatorTable";
-import type { NavigationData } from "../../../services/types/navigatorData.types";
-import type { ElementProps } from "../../../services/types/ElementProps.type";
+import type { NavigationData } from "../../../services/types/navigatorData.type";
+import type { ElementProps } from "../../../../src/services/types/elementProps.type";
 
 interface TableProps {
   headerTable: string;

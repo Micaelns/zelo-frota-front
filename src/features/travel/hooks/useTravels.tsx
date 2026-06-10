@@ -65,7 +65,7 @@ export function useTravels({ vehicleId }: TravelsProps) {
     {
       field: "autonomy",
       label: "",
-      format: (data: string, row: any) =>
+      format: (data: string) =>
         data != undefined ? (
           ""
         ) : (
@@ -73,7 +73,7 @@ export function useTravels({ vehicleId }: TravelsProps) {
             className="p-2 rounded-xl cursor-pointer"
             title="Finalizar viagem"
           >
-            <Link to={`/travels/${row.idTravel}/finish`}>
+            <Link to={`/travels/create`}>
               <BadgeCheck size={14} />
             </Link>
           </div>
@@ -95,8 +95,11 @@ export function useTravels({ vehicleId }: TravelsProps) {
           message: response.error,
         });
       }
-      setTravels(response.value);
-      setTotalItems(response.pagination.totalItems);
+
+      if (response.value) {
+        setTravels(response.value);
+        setTotalItems(response.pagination.totalItems);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +110,8 @@ export function useTravels({ vehicleId }: TravelsProps) {
       setIsLoading(true);
 
       const response = await travelService.find(id);
-      setTravel(response);
+
+      if (response.value) setTravel(response.value);
     } finally {
       setIsLoading(false);
     }

@@ -1,23 +1,7 @@
 import { api } from "../../../services/api/api";
 import type { Destination } from "../../../features/destination/type/destination.types";
 import type { ApiResult } from "../../types/apiResult.type";
-
-function getDefaultError(
-  perPage?: number
-): ApiResult<Destination[]> {
-  return {
-    error:
-      "Ocorreu um erro interno tente novamente mais tarde",
-    pagination: {
-      currentPage: 1,
-      perPage: perPage,
-      totalItems: 0,
-      totalPages: 0,
-    },
-    isSuccess: false,
-    value: [],
-  };
-}
+import { getDefaultPagedError } from "../../api/helpers/apiResponse";
 
 export const destinationService = {
   async getAll(
@@ -33,7 +17,7 @@ export const destinationService = {
       });
       return result.data;
     } catch (e) {
-      return getDefaultError(take);
+      return getDefaultPagedError(take);
     }
   },
 };

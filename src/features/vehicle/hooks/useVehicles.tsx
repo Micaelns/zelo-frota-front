@@ -85,8 +85,10 @@ export function useVehicles() {
           message: response.error,
         });
       }
-      setVehicles(response.value);
-      setTotalItems(response.pagination.totalItems);
+      if (response.value) {
+        setVehicles(response.value);
+        setTotalItems(response.pagination.totalItems);
+      }
     } finally {
       setIsLoading(false);
     }

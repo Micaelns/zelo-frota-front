@@ -74,8 +74,11 @@ export function useDestinations() {
           message: response.error,
         });
       }
-      setDestinations(response.value);
-      setTotalItems(response.pagination.totalItems);
+
+      if (response.value) {
+        setDestinations(response.value);
+        setTotalItems(response.pagination.totalItems);
+      }
     } finally {
       setIsLoading(false);
     }

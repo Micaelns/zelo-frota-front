@@ -21,7 +21,7 @@ export function useVehicleTypesForm() {
 
   async function find(id: string) {
     const vehicleType = await vehicleTypeService.Find(id);
-    if (!vehicleType.isSuccess) {
+    if (!vehicleType.isSuccess || !vehicleType.value) {
       show({
         type: "error",
         message: vehicleType.error,

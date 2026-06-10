@@ -13,14 +13,14 @@ export function VehicleListPage() {
   const actionDelete = async (id: string) => {
     show({
       type: "warning",
-      message: "Não implementado",
+      message: "Não implementado [" + id + "]",
     });
   };
 
   const actionUpdate = async (id: string) => {
     show({
       type: "warning",
-      message: "Não implementado",
+      message: "Não implementado [" + id + "]",
     });
   };
 

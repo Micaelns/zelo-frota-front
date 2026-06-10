@@ -3,6 +3,7 @@ import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
 import { FormElement } from "../../../components/ui/FormElement";
 import { useNavigate } from "react-router-dom";
+import { type SubmitEvent } from "react";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 import { useToast } from "../../../context/toast/useToast";
@@ -56,6 +57,12 @@ export function DestinationFormPage() {
       },
     },
   };
+
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+    navigate("/vehicle-types");
+  }
+
   return (
     <SimplePageLayout
       isLoading={false}
@@ -64,7 +71,7 @@ export function DestinationFormPage() {
       titleEmpty="Destino não encontrado"
       descriptionEmpty="Não foi possível localizar o destino informada."
     >
-      <FormElement>
+      <FormElement handleSubmit={handleSubmit}>
         <FormInput
           labelName="Cep"
           typeField="text"

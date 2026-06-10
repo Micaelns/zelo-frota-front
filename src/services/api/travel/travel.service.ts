@@ -1,23 +1,7 @@
 import type { Travel } from "../../../features/travel/types/travel.types";
 import type { ApiResult } from "../../types/apiResult.type";
 import { api } from "../api";
-
-function getDefaultError(
-  perPage?: number
-): ApiResult<Travel[]> {
-  return {
-    error:
-      "Ocorreu um erro interno tente novamente mais tarde",
-    pagination: {
-      currentPage: 1,
-      perPage: perPage,
-      totalItems: 0,
-      totalPages: 0,
-    },
-    isSuccess: false,
-    value: [],
-  };
-}
+import { getDefaultPagedError } from "../../api/helpers/apiResponse";
 
 export const travelService = {
   async getAll(
@@ -37,13 +21,13 @@ export const travelService = {
       );
       return result.data;
     } catch (e) {
-      return getDefaultError(take);
+      return getDefaultPagedError(take);
     }
   },
   async find(travelId: string): Promise<ApiResult<Travel>> {
     var result = await api.get(
       "/Vehicle/travels/" + travelId
     );
-    return result;
+    return result.data;
   },
 };

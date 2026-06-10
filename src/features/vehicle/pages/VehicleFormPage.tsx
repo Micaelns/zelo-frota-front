@@ -8,6 +8,7 @@ import { FormInput } from "../../../components/ui/FormInput";
 import { FormSelectInput } from "../../../components/ui/FormSelectInput";
 import { FormElement } from "../../../components/ui/FormElement";
 import { useNavigate } from "react-router-dom";
+import { type SubmitEvent } from "react";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 import { useToast } from "../../../context/toast/useToast";
@@ -35,6 +36,10 @@ export function VehicleFormPage() {
     },
   };
 
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+  }
+
   return (
     <SimplePageLayout
       isLoading={false}
@@ -43,7 +48,7 @@ export function VehicleFormPage() {
       titleEmpty="Veículo não encontrado"
       descriptionEmpty="Não foi possível localizar o veículo informado."
     >
-      <FormElement>
+      <FormElement handleSubmit={handleSubmit}>
         <FormMaskInput
           labelName="Placa"
           mask="lll 0a00"

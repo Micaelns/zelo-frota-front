@@ -27,13 +27,15 @@ export function DataListLayout({
 }: DataListLayoutProps) {
   return (
     <div className="flex flex-col justify-center bg-white p-4 gap-2">
-      <div className="flex justify-end">
-        <ButtonSave
-          action={() => buttonDefault?.action()}
-          showIcon={false}
-          text={buttonDefault?.text}
-        />
-      </div>
+      {buttonDefault && (
+        <div className="flex justify-end">
+          <ButtonSave
+            action={() => buttonDefault?.action()}
+            showIcon={false}
+            text={buttonDefault?.text}
+          />
+        </div>
+      )}
       <Table
         headerTable={title}
         isLoading={isLoading}

@@ -1,4 +1,4 @@
-import { ChevronDown, type LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Option = {
   label: string;

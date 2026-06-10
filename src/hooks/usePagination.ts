@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { NavigationData } from "../services/types/navigatorData.types";
+import type { NavigationData } from "../services/types/navigatorData.type";
 
 export function UsePagination() {
   const [currentPage, setCurrentPage] = useState<number>(1);

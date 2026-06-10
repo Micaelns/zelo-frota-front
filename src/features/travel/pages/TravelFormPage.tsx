@@ -6,6 +6,7 @@ import { FormElement } from "../../../components/ui/FormElement";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { useToast } from "../../../context/toast/useToast";
 import { useNavigate } from "react-router-dom";
+import { type SubmitEvent } from "react";
 import { useDestinations } from "../../destination/hooks/useDestination";
 import { useVehicles } from "../../vehicle/hooks/useVehicles";
 
@@ -32,6 +33,10 @@ export function TravelFormPage() {
     },
   };
 
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+  }
+
   return (
     <SimplePageLayout
       isLoading={false}
@@ -40,7 +45,7 @@ export function TravelFormPage() {
       titleEmpty="Viagem não encontrada"
       descriptionEmpty="Não foi possível localizar o viagem informada."
     >
-      <FormElement>
+      <FormElement handleSubmit={handleSubmit}>
         <FormSelectInput
           labelName="Destino"
           icon={MapPinned}

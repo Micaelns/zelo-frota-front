@@ -54,7 +54,7 @@ export function useVehicleTypes() {
           message: response.error,
         });
       }
-      setVehicleTypes(response.value);
+      setVehicleTypes(response.value ?? []);
       setTotalItems(response.pagination.totalItems);
     } finally {
       setIsLoading(false);

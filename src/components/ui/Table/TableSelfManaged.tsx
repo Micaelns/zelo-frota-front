@@ -1,7 +1,7 @@
 import { PencilLine, Trash2 } from "lucide-react";
 import { useState } from "react";
 import PaginatorTable from "./PaginatorTable";
-import type { NavigationData } from "../../../services/types/navigatorData.types";
+import type { NavigationData } from "../../../services/types/navigatorData.type";
 
 type colNames = {
   field: string;
@@ -112,7 +112,7 @@ export default function TableSelfManaged({
           {columnValues.length === 0 && (
             <tr>
               <td
-                colSpan="6"
+                colSpan={columnNames.length}
                 className="text-center p-4 text-zinc-400"
               >
                 {messageEmpty != null
