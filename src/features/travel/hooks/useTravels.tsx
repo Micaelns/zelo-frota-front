@@ -19,8 +19,41 @@ export function useTravels({ vehicleId }: TravelsProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const loadTravels = async (vehicleId: string) => {
+      try {
+        setIsLoading(true);
+        const response = await travelService.getAll(
+          vehicleId,
+          navigation.currentPage,
+          navigation.itemPerPage
+        );
+        if (
+          response.error != null &&
+          response.error != ""
+        ) {
+          show({
+            type: "error",
+            message: response.error,
+          });
+        }
+
+        if (response.value) {
+          setTravels(response.value);
+          setTotalItems(response.pagination.totalItems);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
     if (vehicleId != "") loadTravels(vehicleId);
-  }, [navigation.currentPage, navigation.itemPerPage]);
+  }, [
+    navigation.currentPage,
+    navigation.itemPerPage,
+    setTotalItems,
+    setTravels,
+    show,
+    vehicleId,
+  ]);
 
   const columnsMap: ElementProps<Travel>[] = [
     {
@@ -86,30 +119,6 @@ export function useTravels({ vehicleId }: TravelsProps) {
         ),
     },
   ];
-
-  async function loadTravels(vehicleId: string) {
-    try {
-      setIsLoading(true);
-      const response = await travelService.getAll(
-        vehicleId,
-        navigation.currentPage,
-        navigation.itemPerPage
-      );
-      if (response.error != null && response.error != "") {
-        show({
-          type: "error",
-          message: response.error,
-        });
-      }
-
-      if (response.value) {
-        setTravels(response.value);
-        setTotalItems(response.pagination.totalItems);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   async function loadTravel(id: string) {
     try {

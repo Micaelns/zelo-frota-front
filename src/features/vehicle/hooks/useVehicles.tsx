@@ -28,8 +28,39 @@ export function useVehicles() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const loadVehicles = async () => {
+      try {
+        setIsLoading(true);
+
+        const response = await vehicleService.getAll(
+          navigation.currentPage,
+          navigation.itemPerPage
+        );
+        if (
+          response.error != null &&
+          response.error != ""
+        ) {
+          show({
+            type: "error",
+            message: response.error,
+          });
+        }
+        if (response.value) {
+          setVehicles(response.value);
+          setTotalItems(response.pagination.totalItems);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
     loadVehicles();
-  }, [navigation.currentPage, navigation.itemPerPage]);
+  }, [
+    navigation.currentPage,
+    navigation.itemPerPage,
+    setTotalItems,
+    setVehicles,
+    show,
+  ]);
 
   const columnsMap: ElementProps<Vehicle>[] = [
     {
@@ -70,29 +101,6 @@ export function useVehicles() {
       ),
     },
   ];
-
-  async function loadVehicles() {
-    try {
-      setIsLoading(true);
-
-      const response = await vehicleService.getAll(
-        navigation.currentPage,
-        navigation.itemPerPage
-      );
-      if (response.error != null && response.error != "") {
-        show({
-          type: "error",
-          message: response.error,
-        });
-      }
-      if (response.value) {
-        setVehicles(response.value);
-        setTotalItems(response.pagination.totalItems);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   return {
     vehicles,

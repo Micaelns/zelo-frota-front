@@ -23,8 +23,39 @@ export function useDestinations() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const loadDestinations = async () => {
+      try {
+        setIsLoading(true);
+
+        const response = await destinationService.getAll(
+          navigation.currentPage,
+          navigation.itemPerPage
+        );
+        if (
+          response.error != null &&
+          response.error != ""
+        ) {
+          show({
+            type: "error",
+            message: response.error,
+          });
+        }
+
+        if (response.value) {
+          setDestinations(response.value);
+          setTotalItems(response.pagination.totalItems);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
     loadDestinations();
-  }, [navigation.currentPage, navigation.itemPerPage]);
+  }, [
+    navigation.currentPage,
+    navigation.itemPerPage,
+    setTotalItems,
+    setDestinations,
+  ]);
 
   const columnsMap: ElementProps<Destination>[] = [
     {
@@ -59,30 +90,6 @@ export function useDestinations() {
       format: (row) => row.uf,
     },
   ];
-
-  async function loadDestinations() {
-    try {
-      setIsLoading(true);
-
-      const response = await destinationService.getAll(
-        navigation.currentPage,
-        navigation.itemPerPage
-      );
-      if (response.error != null && response.error != "") {
-        show({
-          type: "error",
-          message: response.error,
-        });
-      }
-
-      if (response.value) {
-        setDestinations(response.value);
-        setTotalItems(response.pagination.totalItems);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   return {
     destinations,

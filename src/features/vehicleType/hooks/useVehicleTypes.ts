@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { vehicleTypeService } from "../../../services/api/vehicleType/vehicleType.service";
 import type { VehicleType } from "../types/vehicleType.types";
 import type { ElementProps } from "../../../services/types/elementProps.type";
@@ -22,25 +22,7 @@ export function useVehicleTypes() {
       };
     });
 
-  useEffect(() => {
-    loadVehicleTypes();
-  }, [navigation.currentPage, navigation.itemPerPage]);
-
-  const columnsMap: ElementProps<VehicleType>[] = [
-    {
-      field: "id",
-      label: "Id",
-      format: (row) =>
-        "..." + row.id?.substring(row.id?.length - 5),
-    },
-    {
-      field: "name",
-      label: "Nome",
-      format: (row) => row.name,
-    },
-  ];
-
-  async function loadVehicleTypes() {
+  const loadVehicleTypes = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -59,7 +41,29 @@ export function useVehicleTypes() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [
+    navigation.currentPage,
+    navigation.itemPerPage,
+    setTotalItems,
+    show,
+  ]);
+  useEffect(() => {
+    loadVehicleTypes();
+  }, [loadVehicleTypes]);
+
+  const columnsMap: ElementProps<VehicleType>[] = [
+    {
+      field: "id",
+      label: "Id",
+      format: (row) =>
+        "..." + row.id?.substring(row.id?.length - 5),
+    },
+    {
+      field: "name",
+      label: "Nome",
+      format: (row) => row.name,
+    },
+  ];
 
   return {
     vehicleTypes,
