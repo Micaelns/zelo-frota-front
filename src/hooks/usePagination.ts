@@ -6,8 +6,8 @@ export function UsePagination() {
   const [perPage, setPerPage] = useState<number>(5);
   const [totalItems, setTotalItems] = useState<number>(0);
 
-  const changePerPage = (e: any) => {
-    setPerPage(e.target.value);
+  const changePerPage = (perPage: number) => {
+    setPerPage(perPage);
     setCurrentPage(1);
   };
 

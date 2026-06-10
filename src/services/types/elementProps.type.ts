@@ -1,5 +1,7 @@
-export interface ElementProps {
-  field: string;
+import type { ReactNode } from "react";
+
+export interface ElementProps<T> {
+  field: keyof T;
   label: string;
-  format: (data: any, row?: any[]) => any;
+  format: (row: T) => ReactNode;
 }

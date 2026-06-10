@@ -10,7 +10,7 @@ export const travelService = {
     take = 5
   ): Promise<ApiResult<Travel[]>> {
     try {
-      var result = await api.get(
+      const result = await api.get(
         "/Vehicle/" + vehicleId + "/travels",
         {
           params: {
@@ -20,12 +20,12 @@ export const travelService = {
         }
       );
       return result.data;
-    } catch (e) {
+    } catch {
       return getDefaultPagedError(take);
     }
   },
   async find(travelId: string): Promise<ApiResult<Travel>> {
-    var result = await api.get(
+    const result = await api.get(
       "/Vehicle/travels/" + travelId
     );
     return result.data;

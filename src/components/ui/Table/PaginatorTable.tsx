@@ -57,7 +57,9 @@ export default function PaginatorTable({
         <span>Itens por página:</span>
         <select
           value={itemPerPage}
-          onChange={changePerPage}
+          onChange={(e) =>
+            changePerPage(Number(e.target.value))
+          }
           className="border border-gray-300 rounded px-2 py-1 bg-white outline-none focus:border-zinc-500 cursor-pointer"
         >
           <option value={5}>5</option>

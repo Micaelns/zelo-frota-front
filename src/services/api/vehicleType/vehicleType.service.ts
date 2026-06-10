@@ -13,14 +13,14 @@ export const vehicleTypeService = {
     take = 5
   ): Promise<ApiResult<VehicleType[]>> {
     try {
-      var result = await api.get("/VehicleType", {
+      const result = await api.get("/VehicleType", {
         params: {
           page,
           take,
         },
       });
       return result.data;
-    } catch (e) {
+    } catch {
       return getDefaultPagedError<VehicleType[]>(take);
     }
   },
@@ -30,7 +30,7 @@ export const vehicleTypeService = {
       await api.post("/VehicleType", {
         ...form,
       });
-    } catch (e) {
+    } catch {
       return;
     }
   },
@@ -47,7 +47,7 @@ export const vehicleTypeService = {
 
   async Find(id: string): Promise<ApiResult<VehicleType>> {
     try {
-      var result = await api.get("/VehicleType/" + id);
+      const result = await api.get("/VehicleType/" + id);
       return result.data;
     } catch (e) {
       return getFormatedError<VehicleType>(e);
@@ -57,7 +57,7 @@ export const vehicleTypeService = {
   async Delete(id: string) {
     try {
       await api.delete("/VehicleType/" + id);
-    } catch (e) {
+    } catch {
       return getDefaultPagedError<VehicleType>();
     }
   },

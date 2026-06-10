@@ -3,6 +3,6 @@ export interface NavigationData {
   totalItens: number;
   totalPages: number;
   itemPerPage: number;
-  changePerPage: (e: any) => void;
+  changePerPage: (perPage: number) => void;
   changePage: (page: number) => void;
 }

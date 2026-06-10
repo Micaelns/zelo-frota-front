@@ -9,7 +9,7 @@ import type { ElementProps } from "../../../../src/services/types/elementProps.t
 
 interface TableProps {
   headerTable: string;
-  columnNames: ElementProps[];
+  columnNames: ElementProps<any>[];
   columnValues: any[];
   isLoading?: boolean;
   messageEmpty?: string;
@@ -51,7 +51,7 @@ export default function Table({
           <tr className="border-b-2 text-left border-gray-300">
             {columnNames.map((col, indexCol) => (
               <th
-                key={`${col.field}-${indexCol}`}
+                key={`${col.field.toString()}-${indexCol}`}
                 className="p-2 font-semibold text-zinc-700"
               >
                 {col.label}
@@ -70,10 +70,10 @@ export default function Table({
               >
                 {columnNames.map((col, indexCol) => (
                   <td
-                    key={`${col.field}-${indexRow}-${indexCol}`}
+                    key={`${col.field.toString()}-${indexRow}-${indexCol}`}
                     className="p-2"
                   >
-                    {col.format(row[col.field], row)}
+                    {col.format(row)}
                   </td>
                 ))}
                 {colEdit && (

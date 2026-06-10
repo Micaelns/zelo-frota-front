@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+echo "Executando build..."
+
+npm run build
+
+if [ $? -ne 0 ]; then
+  echo "Build falhou!"
+  exit 1
+fi

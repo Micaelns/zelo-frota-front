@@ -9,14 +9,14 @@ export const destinationService = {
     take = 5
   ): Promise<ApiResult<Destination[]>> {
     try {
-      var result = await api.get("/Destination", {
+      const result = await api.get("/Destination", {
         params: {
           page,
           take,
         },
       });
       return result.data;
-    } catch (e) {
+    } catch {
       return getDefaultPagedError(take);
     }
   },
