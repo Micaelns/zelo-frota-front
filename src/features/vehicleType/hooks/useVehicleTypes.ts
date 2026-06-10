@@ -26,17 +26,17 @@ export function useVehicleTypes() {
     loadVehicleTypes();
   }, [navigation.currentPage, navigation.itemPerPage]);
 
-  const columnsMap: ElementProps[] = [
+  const columnsMap: ElementProps<VehicleType>[] = [
     {
       field: "id",
       label: "Id",
-      format: (data: any) =>
-        "..." + data.substring(data.length - 5),
+      format: (row) =>
+        "..." + row.id?.substring(row.id?.length - 5),
     },
     {
       field: "name",
       label: "Nome",
-      format: (data: any) => data,
+      format: (row) => row.name,
     },
   ];
 

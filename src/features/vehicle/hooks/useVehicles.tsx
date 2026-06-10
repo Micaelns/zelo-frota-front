@@ -31,38 +31,38 @@ export function useVehicles() {
     loadVehicles();
   }, [navigation.currentPage, navigation.itemPerPage]);
 
-  const columnsMap: ElementProps[] = [
+  const columnsMap: ElementProps<Vehicle>[] = [
     {
       field: "id",
       label: "Id",
-      format: (data: any) =>
-        "..." + data.substring(data.length - 5),
+      format: (row) =>
+        "..." + row.id?.substring(row.id?.length - 5),
     },
     {
       field: "plate",
       label: "Placa",
-      format: (data: any) => data,
+      format: (row) => row.plate,
     },
     {
       field: "vehicleType",
       label: "Tipo de veiculo",
-      format: (data: any) => data.name,
+      format: (row) => row.vehicleType.name,
     },
     {
       field: "mileage",
       label: "Quilometragem",
-      format: (data: any) => data.toFixed(1) + " Km",
+      format: (row) => row.mileage?.toFixed(1) + " Km",
     },
     {
       field: "id",
       label: "Viagens",
-      format: (data: any, row: any) => (
+      format: (row) => (
         <div
           className="p-2 rounded-xl cursor-pointer"
           title="Viagens"
         >
           <Link
-            to={`/vehicles/${data}/travels?plate=${row.plate}&type=${row.vehicleType.name}`}
+            to={`/vehicles/${row.id}/travels?plate=${row.plate}&type=${row.vehicleType.name}`}
           >
             <Route size={14} />
           </Link>

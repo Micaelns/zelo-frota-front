@@ -21,7 +21,7 @@ export function VehicleTypeFormPage() {
     if (!id) return;
 
     find(id);
-  }, [find, id]);
+  }, [id]);
 
   const buttons: ElementButtonsForm = {
     confirm: {

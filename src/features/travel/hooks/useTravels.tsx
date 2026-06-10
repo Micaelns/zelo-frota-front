@@ -22,51 +22,57 @@ export function useTravels({ vehicleId }: TravelsProps) {
     if (vehicleId != "") loadTravels(vehicleId);
   }, [navigation.currentPage, navigation.itemPerPage]);
 
-  const columnsMap: ElementProps[] = [
+  const columnsMap: ElementProps<Travel>[] = [
     {
       field: "idTravel",
       label: "IdTravel",
-      format: (data: any) =>
-        "..." + data.substring(data.length - 5),
+      format: (row) =>
+        "..." +
+        row.idTravel.substring(row.idTravel.length - 5),
     },
     {
       field: "destination",
       label: "Destino",
-      format: (data: any) => data,
+      format: (row) => row.destination,
     },
     {
       field: "startedMileage",
       label: "Inicio Km",
-      format: (data: any) => data.toFixed(1) + " Km",
+      format: (row) =>
+        row.startedMileage?.toFixed(1) + " Km",
     },
     {
       field: "finishedMileage",
       label: "Fim Km",
-      format: (data: any) =>
-        data == undefined ? "" : data.toFixed(1) + " Km",
+      format: (row) =>
+        row.finishedMileage == undefined
+          ? ""
+          : row.finishedMileage?.toFixed(1) + " Km",
     },
     {
       field: "start",
       label: "Inicio",
-      format: (data: any) => data,
+      format: (row) => row.start,
     },
     {
       field: "end",
       label: "Fim",
-      format: (data: any) =>
-        data == undefined ? "" : data,
+      format: (row) =>
+        row.end == undefined ? "" : row.end,
     },
     {
       field: "autonomy",
       label: "Autonomia",
-      format: (data: any) =>
-        data == undefined ? "" : data.toFixed(1) + " Km/L",
+      format: (row) =>
+        row.autonomy == undefined
+          ? ""
+          : row.autonomy?.toFixed(1) + " Km/L",
     },
     {
       field: "autonomy",
       label: "",
-      format: (data: string) =>
-        data != undefined ? (
+      format: (row) =>
+        row.autonomy != undefined ? (
           ""
         ) : (
           <div

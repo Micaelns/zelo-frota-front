@@ -26,37 +26,37 @@ export function useDestinations() {
     loadDestinations();
   }, [navigation.currentPage, navigation.itemPerPage]);
 
-  const columnsMap: ElementProps[] = [
+  const columnsMap: ElementProps<Destination>[] = [
     {
       field: "id",
       label: "Id",
-      format: (data: any) =>
-        "..." + data.substring(data.length - 5),
+      format: (row) =>
+        "..." + row.id?.substring(row.id?.length - 5),
     },
     {
       field: "zipCode",
       label: "CEP",
-      format: (data: any) => data,
+      format: (row) => row.zipCode,
     },
     {
       field: "address",
       label: "Rua",
-      format: (data: any) => data,
+      format: (row) => row.address,
     },
     {
       field: "neighborhood",
       label: "Bairro",
-      format: (data: any) => data,
+      format: (row) => row.neighborhood,
     },
     {
       field: "city",
       label: "Cidade",
-      format: (data: any) => data,
+      format: (row) => row.city,
     },
     {
       field: "uf",
       label: "UF",
-      format: (data: any) => data,
+      format: (row) => row.uf,
     },
   ];
 
