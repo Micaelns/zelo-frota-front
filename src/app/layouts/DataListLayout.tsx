@@ -2,7 +2,7 @@ import Table from "../../components/ui/Table/Table";
 import { ButtonSave } from "../../components/ui/ButtonSave";
 import type { ElementButtonForm } from "../../services/types/elementButtonsForm.type";
 import type { ElementProps } from "../../services/types/elementProps.type";
-import type { NavigationData } from "../../services/types/navigatorData.type";
+import type { NavigationData } from "../../services/types/navigationData.type";
 
 type DataListLayoutProps<T> = {
   title: string;

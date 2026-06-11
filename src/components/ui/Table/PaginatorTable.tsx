@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { NavigationData } from "../../../services/types/navigatorData.type";
+import type { NavigationData } from "../../../services/types/navigationData.type";
 
 type PaginatorTableProps = {
   navigation: NavigationData;
