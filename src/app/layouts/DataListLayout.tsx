@@ -12,11 +12,11 @@ type DataListLayoutProps<T> = {
   data: T[];
   messageEmpty?: string;
   navigation: NavigationData;
-  actionUpdate: (id: string) => void;
-  actionDelete: (id: string) => void;
+  actionUpdate: (row: T) => void;
+  actionDelete: (row: T) => void;
 };
 
-export function DataListLayout({
+export function DataListLayout<T>({
   title,
   isLoading,
   buttonDefault,
@@ -26,7 +26,7 @@ export function DataListLayout({
   navigation,
   actionUpdate,
   actionDelete,
-}: DataListLayoutProps) {
+}: DataListLayoutProps<T>) {
   return (
     <div className="flex flex-col justify-center bg-white p-4 gap-2">
       {buttonDefault && (

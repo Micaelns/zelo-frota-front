@@ -7,6 +7,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import type { Travel } from "../types/travel.types";
 
 export function TravelListPage() {
   const { vehicleId } = useParams<string>();
@@ -26,17 +27,17 @@ export function TravelListPage() {
   if (!vehicleId) {
     return "Veículo não informado";
   }
-  const actionDelete = async (id: string) => {
+  const actionDelete = async (row: Travel) => {
     show({
       type: "warning",
-      message: "Não implementado [" + id + "]",
+      message: "Não implementado [" + row.idTravel + "]",
     });
   };
 
-  const actionUpdate = async (id: string) => {
+  const actionUpdate = async (row: Travel) => {
     show({
       type: "warning",
-      message: "Não implementado [" + id + "]",
+      message: "Não implementado [" + row.idTravel + "]",
     });
   };
 

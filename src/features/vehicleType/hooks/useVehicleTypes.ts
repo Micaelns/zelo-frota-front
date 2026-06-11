@@ -35,9 +35,10 @@ export function useVehicleTypes() {
           type: "error",
           message: response.error,
         });
+      } else {
+        setVehicleTypes(response.value ?? []);
+        setTotalItems(response.pagination.totalItems);
       }
-      setVehicleTypes(response.value ?? []);
-      setTotalItems(response.pagination.totalItems);
     } finally {
       setIsLoading(false);
     }
@@ -45,7 +46,6 @@ export function useVehicleTypes() {
     navigation.currentPage,
     navigation.itemPerPage,
     setTotalItems,
-    show,
   ]);
   useEffect(() => {
     loadVehicleTypes();

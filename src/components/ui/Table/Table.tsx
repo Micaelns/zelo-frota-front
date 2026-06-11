@@ -16,11 +16,11 @@ interface TableProps<T> {
   navigation: NavigationData;
   colEdit?: boolean;
   colTrash?: boolean;
-  actionUpdate: (id: string) => void;
-  actionDelete: (id: string) => void;
+  actionUpdate: (row: T) => void;
+  actionDelete: (row: T) => void;
 }
 
-export default function Table({
+export default function Table<T>({
   headerTable,
   columnNames,
   columnValues,
@@ -31,7 +31,7 @@ export default function Table({
   colTrash = true,
   actionUpdate,
   actionDelete,
-}: TableProps) {
+}: TableProps<T>) {
   const messageNoData =
     messageEmpty != null
       ? messageEmpty
@@ -66,7 +66,7 @@ export default function Table({
             columnValues.map((row, indexRow) => (
               <tr
                 className=" border-b border-zinc-100 hover:bg-slate-200"
-                key={row.id || indexRow}
+                key={indexRow}
               >
                 {columnNames.map((col, indexCol) => (
                   <td
@@ -87,7 +87,7 @@ export default function Table({
                           );
                           return;
                         }
-                        actionUpdate(row.id);
+                        actionUpdate(row);
                       }}
                     >
                       <PencilLine size={14} />
@@ -105,7 +105,7 @@ export default function Table({
                           );
                           return;
                         }
-                        actionDelete(row.id);
+                        actionDelete(row);
                       }}
                     >
                       <Trash2 size={14} />

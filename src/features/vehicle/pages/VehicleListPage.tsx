@@ -3,6 +3,7 @@ import { DataListLayout } from "../../../app/layouts/DataListLayout";
 import type { ElementButtonForm } from "../../../services/types/elementButtonsForm.type";
 import { useToast } from "../../../context/toast/useToast";
 import { useNavigate } from "react-router-dom";
+import type { Vehicle } from "../types/vehicle.types";
 
 export function VehicleListPage() {
   const navigate = useNavigate();
@@ -10,17 +11,17 @@ export function VehicleListPage() {
   const { vehicles, isLoading, columnsMap, navigation } =
     useVehicles();
 
-  const actionDelete = async (id: string) => {
+  const actionDelete = async (row: Vehicle) => {
     show({
       type: "warning",
-      message: "Não implementado [" + id + "]",
+      message: "Não implementado [" + row.id + "]",
     });
   };
 
-  const actionUpdate = async (id: string) => {
+  const actionUpdate = async (row: Vehicle) => {
     show({
       type: "warning",
-      message: "Não implementado [" + id + "]",
+      message: "Não implementado [" + row.id + "]",
     });
   };
 

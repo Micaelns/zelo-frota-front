@@ -59,7 +59,6 @@ export function useVehicles() {
     navigation.itemPerPage,
     setTotalItems,
     setVehicles,
-    show,
   ]);
 
   const columnsMap: ElementProps<Vehicle>[] = [

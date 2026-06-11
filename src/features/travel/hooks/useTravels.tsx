@@ -51,7 +51,6 @@ export function useTravels({ vehicleId }: TravelsProps) {
     navigation.itemPerPage,
     setTotalItems,
     setTravels,
-    show,
     vehicleId,
   ]);
 

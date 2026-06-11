@@ -3,10 +3,10 @@ import { FormInput } from "../../../components/ui/FormInput";
 import { ButtonsForm } from "../../../components/ui/ButtonsForm";
 import { SimplePageLayout } from "../../../app/layouts/SimplePageLayout";
 import { FormElement } from "../../../components/ui/FormElement";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import type { SubmitEvent } from "react";
 import { useVehicleTypesForm } from "../hooks/useVehicleTypeForm";
 import type { ElementButtonsForm } from "../../../services/types/elementButtonsForm.type";
-import { useParams } from "react-router-dom";
 
 export function VehicleTypeFormPage() {
   const { id } = useParams();
