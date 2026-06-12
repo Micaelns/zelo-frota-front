@@ -14,8 +14,8 @@ on:
 
 env:
   IMAGE_NAME: zelo-frota-front
-  ACR_NAME: ccrzelofrotafronthlg
-  ACR_LOGIN_SERVER: acrzelofrotafront.azurecr.io
+  ACR_NAME: ccrZeloFrotaFrontHlg
+  ACR_LOGIN_SERVER: ccrzelofrotafronthlg-ducfd7cwfrd6hrcf.azurecr.io
 
 jobs:
   ################################################################################
