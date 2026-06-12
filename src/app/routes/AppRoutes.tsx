@@ -11,7 +11,7 @@ import { VehicleListPage } from "../../features/vehicle/pages/VehicleListPage";
 import { VehicleTypeListPage } from "../../features/vehicleType/pages/VehicleTypeListPage";
 import { DestinationListPage } from "../../features/destination/pages/DestinationListPage";
 import { TravelListPage } from "../../features/travel/pages/TravelListPage";
-import { VehicleTypeFormPage } from "../../features/vehicleType/pages/VehicleTypeFormPage";
+import { VehicleTypeFormPage } from "../../features/vehicleType/pages/VehicleTypeFormTestPage";
 import { VehicleFormPage } from "../../features/vehicle/pages/VehicleFormPage";
 import { DestinationFormPage } from "../../features/destination/pages/DestinationFormPage";
 import { TravelFormPage } from "../../features/travel/pages/TravelFormPage";
