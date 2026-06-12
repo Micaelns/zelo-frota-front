@@ -1,1 +1,2 @@
+echo "Executando os testes..."
 npm test

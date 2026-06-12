@@ -20,7 +20,7 @@ describe("ButtonDefault", () => {
   it("deve exibir o text corretamente", () => {
     render(
       <ButtonDefault
-        text="Voltarb"
+        text="Voltar"
         action={vi.fn()}
         showIcon={true}
       />
