@@ -3,7 +3,7 @@ name: Zelo Frota Pipeline
 on:
   push:
     branches:
-      - "release/*"
+      - "release-*"
 
   workflow_dispatch:
     inputs:
