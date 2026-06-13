@@ -34,7 +34,7 @@ export function VehicleTypeListPage() {
 
   return (
     <DataListLayout
-      title="Lista Tipo de Veículos"
+      title="Listar Tipo de Veículos"
       isLoading={isLoading}
       columns={columnsMap}
       data={vehicleTypes}
