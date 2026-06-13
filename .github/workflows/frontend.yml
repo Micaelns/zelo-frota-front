@@ -13,7 +13,7 @@ on:
         type: string
 
 env:
-  IMAGE_NAME: zelo-frota-front
+  IMAGE_NAME: zelofrotafront
   ACR_NAME: ccrZeloFrotaFrontHlg
   ACR_LOGIN_SERVER: ccrzelofrotafronthlg-ducfd7cwfrd6hrcf.azurecr.io
 
